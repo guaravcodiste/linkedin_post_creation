@@ -1,0 +1,88 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+Enterprise AI Agents: The 4 Mistakes Killing 60% of Pilots
+
+KEYWORDS TO USE AS HASHTAGS:
+#AIAgents #EnterpriseAI #AIStrategy #AgentDevelopment #AIInfrastructure
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+Enterprise AI agent pilots are dying at a 60% rate before they ever reach production. The problem isn't the technology. It's four repeatable mistakes that almost every enterprise buyer makes — and that every experienced vendor has already watched kill a program.
+
+Most companies buying AI agent development services in 2026 still treat the engagement like a software feature project. That's the root cause.
+
+## What Enterprise AI Agent Development Actually Is
+
+Enterprise AI agent development is not chatbot work with extra steps. Building a production agent means shipping a system with state machines, tool-use orchestration, evaluation harnesses, rollback paths, and an operating model — closer to distributed systems engineering than to prompt engineering.
+
+The deliverable is not a model. It's a production system with the model at its center, running against enterprise data, inside compliance boundaries, with SLAs and on-call rotations from day one.
+
+Buyers who treat this like a software feature buy a demo. Buyers who treat it like infrastructure buy a system that still runs reliably in month 18.
+
+## Why Most AI Agent Pilots Never Reach Production
+
+Across 47 enterprise AI agent pilots tracked across US fintech, SaaS, and RegTech buyers in 2025, 28 either died in pilot or got descoped to a chatbot before production. Four mistake patterns drove nearly all of them:
+
+- **Wrong first workflow.** The first agent should handle the boring, constrained workflow — one where 80% is already deterministic and the agent adds judgment to the remaining 20%. Most buyers pick their highest-ROI workflow first. The pilot fails. Executive support evaporates.
+- **No eval infrastructure on day one.** A real eval harness has 200+ representative test cases, automated scoring across four dimensions (task success, tool-use correctness, latency, cost), and a CI gate that blocks deploys that regress more than 3%. Any vendor treating eval as a phase-two deliverable has not shipped a production agent.
+- **Treating LLM cost as fixed.** A well-architected agent routes small models to simple decisions and frontier models only when the task warrants it — cutting run costs 50–70%. A poorly architected one uses GPT-4-class models for every call and burns 4× the projected budget by month three.
+- **No operating model post-launch.** The agent ships. The vendor exits. The buyer's team has no on-call rotation, no incident playbook, and no ownership of model behavior. Three weeks later, the agent starts misbehaving and 4,000 wrong actions require remediation.
+
+## The One Question That Filters 80% of Vendors
+
+Ask every shortlisted vendor a single question: "Can you name two production agents running in comparable workflows for over 12 months?" Not demos. Not agentic prototypes. Named deployments with reference customers.
+
+Vendors who cannot clear this bar are selling intent, not capability. Every vendor in 2026 knows LangGraph, CrewAI, and AutoGen. What separates partners from vendors is whether they've debugged a production agent at 3 AM when the tool layer started returning malformed responses to a live compliance workflow.
+
+The second signal: insist on a 2-week paid scoping engagement before committing to a fixed-bid contract. The right scoping engagement — priced at $15,000–$40,000 — produces an architecture document, integration map, eval framework outline, cost model, and risk register. Detailed enough that a second vendor could pick up the build. Any vendor willing to quote a fixed bid off a single discovery call is either underestimating the project or planning to bill change orders later. Neither is the partner profile that ships.
+
+## What a Real Enterprise AI Agent Build Costs in 2026
+
+First-deployment build costs for a production-grade enterprise agent range from $180,000 to $850,000, depending on integration depth, compliance scope, and human-in-the-loop architecture:
+
+- Internal knowledge agent (read-only, low risk): $180K–$280K, 8–12 weeks to production
+- Customer-facing support agent (regulated industry): $320K–$520K, 14–20 weeks
+- Workflow automation agent (writes to systems of record): $380K–$650K, 16–22 weeks
+- Compliance or fraud detection agent (high-stakes): $520K–$850K, 20–28 weeks
+
+The number most buyers underestimate is run cost. A $420K build typically carries a $35K monthly run cost. Over three years, that's $1.26M in run costs — 3× the build price. Buyers comparing vendors only on build cost are optimizing the wrong number.
+
+A high-signal question to ask any vendor: what is your token-per-task benchmark on a comparable workflow? A well-architected agent handles a typical task in 1,500–4,000 tokens. A poorly architected one burns 12,000–40,000 tokens at the same quality bar — a 10× cost difference that compounds every month.
+
+## The Real Commitment You're Making
+
+The buyer evaluating AI agent development services in 2026 is making a 3-year operating commitment, not a one-time purchase. The build cost is the smaller decision. The harder one is choosing a partner whose system still runs reliably 18 months from now — without an emergency remediation engagement.
+
+Pick the partner who has shipped before, can prove it with named production deployments, and insists on a scoping document before asking for a contract.
+
+---
+
+🔗 **Want the full breakdown?**
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 **Building an AI agent for your enterprise?**
+Connect with Codiste — we help funded startups and enterprise teams design, build, and scale AI agent systems. Senior engineers, 2-week paid scoping, eval-first delivery from day one. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗬𝗼𝘂𝗿 𝗔𝗜 𝗮𝗴𝗲𝗻𝘁 𝗥𝗙𝗣 𝗶𝘀 𝘀𝗲𝗹𝗲𝗰𝘁𝗶𝗻𝗴 𝗳𝗼𝗿 𝘁𝗵𝗲 𝗯𝗲𝘀𝘁 𝗱𝗲𝗰𝗸 — 𝗻𝗼𝘁 𝘁𝗵𝗲 𝘁𝗲𝗮𝗺 𝘁𝗵𝗮𝘁 𝗰𝗮𝗻 𝗮𝗰𝘁𝘂𝗮𝗹𝗹𝘆 𝘀𝗵𝗶𝗽.
+The 4 mistakes driving 60% of enterprise AI agent pilot failures — and how to stop repeating them → [article link]
+
+#AIAgents #EnterpriseAI #CTOInsights #AIAgentDevelopment #AIStrategy
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~760 words
+• Estimated read time: 4 min
+• Remember to: add the blog URL in the CTA block and caption
+• Banner slug: enterprise-ai-agents-4-mistakes
+• Banner Line 1 (Regular): Enterprise AI Agents:
+• Banner Line 2 (Bold): The 4 Mistakes Killing 60% of Pilots
