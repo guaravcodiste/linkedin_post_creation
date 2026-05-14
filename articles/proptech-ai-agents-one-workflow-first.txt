@@ -1,0 +1,88 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+Proptech AI Agents: Why One Workflow First Beats Everything Else
+
+KEYWORDS TO USE AS HASHTAGS:
+#Proptech #AIAgents #PropertyManagement #RealEstateAI #OperationsStrategy
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+The leasing assistant you replaced in March wasn't the problem. The framing was.
+
+Most US property management firms deployed AI agents starting in 2024 with a clear goal: automate the administrative overhead. By late 2025, a distinct pattern had separated the wins from the failures. The firms that shipped did one thing differently. They went narrow first — and stayed narrow long enough for it to work.
+
+## Why Most Proptech AI Deployments Stall Before Month Four
+
+The failure sequence is entirely predictable. A firm buys a horizontal AI chatbot, sees a 30% reduction in inbound triage time, and immediately expands scope. The leasing bot starts handling maintenance requests. Then renewals. Then onboarding. Each new workflow halves the accuracy of the previous one. By month four, nothing works well and the team is debugging twelve problems simultaneously.
+
+Three failure modes drive every stalled deployment:
+
+- Scope creep: one model asked to own the entire tenant lifecycle, compressing six distinct workflows into one underperforming system
+- Licensing exposure: AI quoting rent terms or making property representations triggers regulated activity in most US states — Texas, California, and New York all issued formal guidance in the past 18 months
+- Integration debt: an agent that lives outside your property management system creates two sources of truth, and tenant complaints disappear between them
+
+The fix for all three begins with the same decision: one workflow, owned end-to-end, before anything else.
+
+## What Production-Ready Proptech AI Actually Looks Like
+
+The deployments that ship in 2026 share four structural properties. None of them are about which AI model you use.
+
+They own exactly one workflow from inbound to handoff — not from inbound to lease execution. They produce a complete handoff packet for the licensed human: lead score, conversation history, qualifying answers, scheduling preferences, and flags. The human spends 30 seconds where they previously spent 15 minutes. They write back into AppFolio, Buildium, or RealPage — not alongside it. And they fail closed: when confidence drops below threshold, the conversation routes to a human within two minutes, with full context.
+
+That last property is where most chatbot deployments break. When escalation queues bounce tenants without context, the agent hasn't saved time — it's built resentment.
+
+## The Three-Agent Sequence: Which to Deploy First
+
+The firms that consistently ship don't try to deploy three agents in one quarter. They stabilize one for six weeks, then deploy the next. Sequence is determined by risk and payback, not convenience or ambition.
+
+Listing operations first. Lowest licensing exposure, fastest payback, cleanest integration boundary. The agent generates copy, tags photos, syndicates across MLS and major listing portals, and handles routine updates. The worst failure mode is a duplicate listing — not a regulatory violation. Build this one to establish the operational pattern.
+
+Leasing agent second. Higher complexity, higher risk, higher payback. Integration with your property management system is the gating constraint. AppFolio, Buildium, and RealPage all have agent-friendly APIs in 2026, but production quirks surface during each integration. Six to eight weeks to first value is realistic; faster timelines usually mean shallow integration.
+
+Tenant operations agent third. Highest integration depth, longest payback period, but the largest absolute volume of administrative work. Maintenance triage, rent reminders, lease renewal outreach. Build this after the deployment pattern is proven on the first two.
+
+## From 14% Conversion Drop to 6% Above Baseline
+
+A regional firm managing 12,000 units across Texas and Arizona ran the failed deployment first. They rolled out a horizontal chatbot across leasing, maintenance, and renewals simultaneously. Leasing conversion dropped 14% in eight weeks. They paused in May and rebuilt.
+
+The rebuild applied the one-workflow-first framework. Three separate agents, deployed sequentially, each owning exactly one workflow, each writing back into AppFolio. Results at six months:
+
+- Leasing agent handles 71% of qualifying conversations to handoff without human involvement
+- Maintenance triage agent resolves 58% of Tier 1 tickets without dispatch
+- Time-to-published for new listings compressed from four hours to 23 minutes
+- Leasing conversion recovered to baseline by month three and is now 6% above the pre-deployment number
+
+Headcount stayed flat. Throughput tripled. The COO described it as moving from administrative load to relationship and judgment — not fewer people, but people doing the work their experience warrants.
+
+The agent doesn't replace anyone. It removes the 60–70% of the workday that was never worth a licensed professional's time in the first place.
+
+---
+
+🔗 Want the full breakdown?
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 Building a proptech AI stack?
+Connect with Codiste — we help property management firms and proptech SaaS companies design, build, and scale AI agent systems. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗣𝗿𝗼𝗽𝘁𝗲𝗰𝗵 𝗳𝗶𝗿𝗺𝘀 𝘀𝗰𝗮𝗹𝗶𝗻𝗴 𝘁𝗼 𝟮𝟬𝗞+ 𝘂𝗻𝗶𝘁𝘀 𝗮𝗿𝗲𝗻'𝘁 𝗵𝗶𝗿𝗶𝗻𝗴 𝗺𝗼𝗿𝗲 𝗰𝗼𝗼𝗿𝗱𝗶𝗻𝗮𝘁𝗼𝗿𝘀 — 𝘁𝗵𝗲𝘆'𝗿𝗲 𝗿𝗲𝘄𝗿𝗶𝘁𝗶𝗻𝗴 𝘄𝗵𝗮𝘁 𝗮 𝗰𝗼𝗼𝗿𝗱𝗶𝗻𝗮𝘁𝗼𝗿 𝗵𝗮𝗻𝗱𝗹𝗲𝘀.
+The real proptech AI playbook: sequence, scope, and why one workflow at a time wins → [article link]
+
+#Proptech #AIAgents #PropertyManagement #RealEstateAI #OperationsStrategy
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~770 words
+• Estimated read time: 4 min
+• Remember to: add the blog URL in the CTA block
+• Article slug: proptech-ai-agents-one-workflow-first
+• Banner files: codiste-banner-proptech-ai-agents-one-workflow-first.png / .jpg
