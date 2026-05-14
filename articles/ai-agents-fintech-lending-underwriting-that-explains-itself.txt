@@ -1,0 +1,89 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+AI Agents in Fintech Lending: Underwriting That Explains Itself
+
+KEYWORDS TO USE AS HASHTAGS:
+#FinTech #AIAgents #Lending #Underwriting #FairLending
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+Your underwriting team spends 40% of its time extracting data from documents that an AI could process in 90 seconds. The other 60% — risk judgment, borrower context, policy interpretation — is the work that requires their expertise. That ratio is backwards, and it's costing you throughput.
+
+US fintech lenders processing more than 5,000 applications per month have hit a wall with manual review pipelines. Not because the underwriters aren't skilled — they are. Because the operational model hasn't kept pace with loan volume, and the regulatory environment has made shortcuts impossible. A wrong decision needs to be defensible. A fast decision needs to be explainable. These requirements, combined, define the ceiling for human-only underwriting at scale.
+
+AI agents don't lower that ceiling. They change where human judgment sits in the pipeline.
+
+## What's Actually Slowing Down Lending Operations
+
+Most fintech lenders think their bottleneck is underwriter capacity. The real bottleneck is almost always data assembly. Before a skilled underwriter can make a judgment call, someone has to pull the bank statements, cross-check the income figures, run the identity verification output, check the policy matrix, and compile the file. That assembly work is consuming 30 to 45 minutes per application.
+
+Three friction points account for 80% of that time:
+
+**Document extraction.** Paystubs, bank statements, and tax returns arrive in formats that don't map cleanly to the fields in your loan origination system. Someone is manually reading and transcribing. An AI agent handles this in seconds with higher accuracy than manual entry.
+
+**Policy evaluation.** Your underwriting policy has 40 to 80 decision rules. Checking each rule against a specific application profile is mechanical work — but it still takes a trained underwriter 15 to 20 minutes because the rules are documented in static PDFs, not queryable systems.
+
+**Fair lending documentation.** Every adverse action requires an explanation under ECOA. Producing that explanation manually — pulling the specific factors, mapping them to the adverse action notice requirements — is another 10 to 15 minutes per declined application.
+
+## The Three-Agent Pipeline That Changes the Ratio
+
+The architecture that consistently ships in fintech lending is a sequential three-agent system:
+
+**Document extraction agent.** Ingests unstructured documents — paystubs, bank statements, W-2s — and maps extracted fields to structured loan application data. Accuracy is logged per field, and low-confidence extractions are flagged for human review. The agent doesn't approve or decline. It produces structured data with confidence scores.
+
+**Policy evaluation agent.** Takes the structured application data and evaluates it against the versioned policy corpus. Each rule is checked sequentially. The agent produces a decision recommendation with the full reasoning trace: which rules fired, which were borderline, which require human judgment. Policy corpus is versioned — when underwriting guidelines change, prior decisions can be replayed against historical rules.
+
+**Decision packaging agent.** Produces the final file for underwriter review: structured data from extraction, policy evaluation results, risk flags, adverse action factors (if applicable), and a confidence score on the overall recommendation. For high-confidence approvals, this goes to execution. For everything else, it goes to the underwriter with complete context.
+
+An underwriter reviewing a packaged file takes 4 minutes average. The same file without packaging takes 28 minutes. The agent doesn't replace the underwriter — it removes the work that wasn't underwriting.
+
+## What Explainability Looks Like in Production
+
+The fair lending requirement is where most fintech AI deployments either get it right or fail at the regulatory review. An AI agent that produces a recommendation without a reasoning trace is not deployable in a regulated lending environment. Period.
+
+The three-agent pipeline produces explainability as a structural output. Every policy rule that was evaluated is logged. Every factor that influenced the recommendation is recorded with its weight. When a borrower is declined and requests an adverse action notice, the agent retrieves the decision record and generates the ECOA-compliant explanation automatically.
+
+This is what "AI in lending" looks like when it's built correctly — not a score with no provenance, but a complete decision record that satisfies both speed and compliance requirements.
+
+## Results at a US Personal Loan Platform
+
+A US fintech personal loan platform processing 11,000 applications per month deployed this three-agent pipeline over four months. Results at six months:
+
+- Document extraction processing time: 3 minutes per application average, down from 38 minutes
+- Underwriter review time for AI-packaged files: 4 minutes average, down from 28 minutes
+- Applications reaching underwriter decision per day: up 340%
+- Adverse action notice production: automated for 94% of declined applications
+- Fair lending audit preparation time: reduced from 3 weeks to 4 days
+
+The underwriting team headcount stayed flat. Application volume grew 60% over the same period. The COO described the outcome as finally having underwriters do underwriting.
+
+---
+
+🔗 Want the full breakdown?
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 Building an AI-powered lending stack?
+Connect with Codiste — we design and build regulated AI agent systems for fintech lenders, neobanks, and credit platforms. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗬𝗼𝘂𝗿 𝘂𝗻𝗱𝗲𝗿𝘄𝗿𝗶𝘁𝗶𝗻𝗴 𝘁𝗲𝗮𝗺 𝗶𝘀 𝘀𝗽𝗲𝗻𝗱𝗶𝗻𝗴 𝟰𝟬% 𝗼𝗳 𝗶𝘁𝘀 𝘁𝗶𝗺𝗲 𝗲𝘅𝘁𝗿𝗮𝗰𝘁𝗶𝗻𝗴 𝗱𝗮𝘁𝗮 𝘁𝗵𝗮𝘁 𝗮𝗻 𝗔𝗜 𝗰𝗼𝘂𝗹𝗱 𝗽𝗿𝗼𝗰𝗲𝘀𝘀 𝗶𝗻 𝟵𝟬 𝘀𝗲𝗰𝗼𝗻𝗱𝘀.
+AI agents in fintech lending: the 3-agent pipeline that cut review time from 28 minutes to 4 → [article link]
+
+#FinTech #AIAgents #Lending #Underwriting #FairLending
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~790 words
+• Estimated read time: 4 min
+• Remember to: add the blog URL in the CTA block
+• Article slug: ai-agents-fintech-lending-underwriting-that-explains-itself
+• Banner files: codiste-banner-ai-agents-fintech-lending-underwriting-that-explains-itself.png / .jpg
