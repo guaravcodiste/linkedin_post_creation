@@ -1,0 +1,88 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+AI Agents for Property Management: Running at 10,000 Units
+
+KEYWORDS TO USE AS HASHTAGS:
+#Proptech #PropertyManagement #AIAgents #RealEstate #OperationsAtScale
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+At 500 units, a good property management team can run everything manually. At 2,000 units, you start feeling the strain. At 10,000 units, the operational model that got you here stops working — and hiring your way through it doesn't either.
+
+The firms successfully managing 10,000+ units in 2026 haven't found a way to hire faster. They've rebuilt what their teams actually do. The coordination work — maintenance routing, lease renewal outreach, rent reminder sequences, move-in logistics — runs through AI agents. The managers handle escalations, relationships, and judgment calls that require a human on the other end.
+
+That distinction matters. This isn't replacing property managers. It's removing the 60 to 70 percent of their day that was never worth a licensed professional's time in the first place.
+
+## The Scale Problem No One Talks About
+
+Most property management software vendors will tell you they solve the coordination problem. They don't. They give you better visibility into a manual process, which helps at 500 units. At 10,000 units, you're not understaffed — you're architecturally misaligned.
+
+The ceiling isn't headcount. It's response latency. A maintenance request submitted at 6pm on a Friday doesn't reach a human coordinator until Monday morning in a manual operation. That 60-hour gap creates resident dissatisfaction, delayed vendor scheduling, and a maintenance backlog that compounds week over week.
+
+At 10,000 units, the operations team gets 200 to 300 maintenance requests per week, 400 to 600 resident communications, and 150 to 200 lease renewal decisions — simultaneously. No hiring plan addresses that volume without also transforming the workflows themselves.
+
+## The Three Agent Deployments That Matter at Scale
+
+Property management firms managing 5,000+ units have converged on three core AI agent deployments. Not because they're the most technically interesting, but because they address the highest-volume, highest-latency workflows in the operation.
+
+**Maintenance triage agent.** Handles inbound maintenance requests, classifies by severity and category, assigns to the right vendor queue, and sends resident confirmation with realistic timeline. The agent resolves 55 to 65% of Tier 1 tickets — routine HVAC, plumbing, appliance issues — without human dispatch involvement. Emergency issues route to on-call staff immediately with full context. Resident communication stays continuous throughout the repair cycle.
+
+**Lease renewal agent.** Initiates renewal outreach at 90 days pre-expiration, personalizes offers based on resident tenure and market comps, handles back-and-forth on terms, and escalates final decisions to a leasing manager with full negotiation history. Renewal rate improvements of 8 to 14% are common in the first year — primarily because the outreach is timely and the follow-up is consistent, not because the offers changed.
+
+**Resident communication agent.** Handles rent reminders, payment plan initiation for early delinquency, move-in and move-out coordination, and general inquiry resolution. The agent doesn't replace the property manager for relationship conversations. It handles the volume of transactional communications that currently consumes 40% of a property manager's day.
+
+Each agent writes back into AppFolio, Buildium, or RealPage. There is no parallel system of record. When a property manager needs context on a resident, it's in the platform they already use — not in an AI dashboard they have to check separately.
+
+## What Integration Actually Requires
+
+The integration question is where most deployments stall. AppFolio, Buildium, and RealPage all have mature APIs in 2026, but production integration has quirks that don't appear in documentation.
+
+Maintenance request routing requires clean vendor category mappings — if your vendor taxonomy in the platform isn't structured, the agent will route inconsistently. Lease renewal agent requires access to comp data and portfolio-level pricing parameters, which most platforms store in ways that require custom extraction logic. Resident communication requires accurate unit-to-contact mappings, which in older portfolios often have data quality issues.
+
+Four to six weeks of integration work is realistic before the agents go live. Teams that skip this step or compress it create agents that perform unreliably — and unreliable agents are worse than no agents, because they erode resident trust.
+
+## The Numbers at a 14,000-Unit Portfolio
+
+A Southeast US residential management firm managing 14,000 units across four states deployed all three agents over eight months.
+
+Six-month results:
+- Maintenance Tier 1 resolution without dispatch: 61%
+- Average maintenance response time: 47 minutes, down from 14 hours
+- Lease renewal rate: up 11% year-over-year
+- Resident satisfaction scores (NPS): up 18 points
+- Property manager capacity per manager: from 280 units to 440 units
+
+Headcount decreased by attrition, not layoffs. The firm grew its portfolio 24% without adding operational staff.
+
+That's the model. Not fewer people doing the same work. Different people doing different work — the work that actually requires them.
+
+---
+
+🔗 Want the full breakdown?
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 Scaling a property management operation with AI?
+Connect with Codiste — we build AI agent systems for residential and commercial property management firms managing 2,000 to 50,000 units. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗣𝗿𝗼𝗽𝗲𝗿𝘁𝘆 𝗺𝗮𝗻𝗮𝗴𝗲𝗺𝗲𝗻𝘁 𝗳𝗶𝗿𝗺𝘀 𝘀𝗰𝗮𝗹𝗶𝗻𝗴 𝗽𝗮𝘀𝘁 𝟱,𝟬𝟬𝟬 𝘂𝗻𝗶𝘁𝘀 𝗱𝗼𝗻'𝘁 𝗵𝗮𝘃𝗲 𝗮 𝗵𝗲𝗮𝗱𝗰𝗼𝘂𝗻𝘁 𝗽𝗿𝗼𝗯𝗹𝗲𝗺. 𝗧𝗵𝗲𝘆 𝗵𝗮𝘃𝗲 𝗮𝗻 𝗮𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲 𝗽𝗿𝗼𝗯𝗹𝗲𝗺.
+The 3 AI agents running operations at 10,000+ units — and the numbers from a 14,000-unit portfolio → [article link]
+
+#Proptech #PropertyManagement #AIAgents #RealEstate #OperationsAtScale
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~790 words
+• Estimated read time: 4 min
+• Remember to: add the blog URL in the CTA block
+• Article slug: ai-agents-property-management-running-at-10000-units
+• Banner files: codiste-banner-ai-agents-property-management-running-at-10000-units.png / .jpg
