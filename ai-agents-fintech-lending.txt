@@ -1,0 +1,86 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+AI Agents for Fintech Lending: Credit Decisions in Hours, Not Days
+
+KEYWORDS TO USE AS HASHTAGS:
+#FintechLending #AIUnderwriting #CreditDecisioning #LendingTech #AIAgents
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+Your underwriting team reviews 300 loan applications per week. Thirty get rejected because the credit file is thin — not because the applicant is a bad risk. Your senior underwriters know this. They can see cash flow patterns in bank statements that a FICO score cannot capture.
+
+The problem: evaluating that and documenting the decision in a format that satisfies your secondary market compliance requirements takes 4 hours per file. At current volume, your team can apply judgment to about 60 files a week. The other 240 get a rules-based decision.
+
+AI agents for fintech lending close this gap — without creating new explainability problems.
+
+## The Explainability Problem Is in the Wrong Layer
+
+CFPB's adverse action notice requirements under ECOA and FCRA require that a declined applicant receives a specific reason for the decision. This is where AI explainability anxiety in lending comes from.
+
+But most fintechs are treating this as a model interpretability problem. It's an architecture problem.
+
+The explainability requirement applies to the credit decision — not to the document extraction step, not to the alternative data synthesis step. Only to the final credit call. In a correctly designed agentic lending system, that decision runs on a deterministic rules engine: your credit policy, expressed as explicit if-then rules, applied to structured data. The rules are readable. The decision is explainable by construction.
+
+AI agents work upstream: extracting data from bank statements, processing pay stubs, verifying identity documents. Their outputs become structured inputs to the deterministic policy engine. You do not apply AI to the credit decision. You apply AI to the data preparation that makes better credit decisions possible.
+
+## How the Four-Agent Pipeline Works
+
+Each agent in the pipeline has a defined scope, a defined input, and a defined output:
+
+- Document ingestion agent: OCR and structure extraction from bank statements, pay stubs, and tax returns — 90 seconds per document, low compliance risk
+- Alternative data agent: cash flow pattern analysis, income stability scoring, employment verification via payroll APIs — 4 to 8 minutes per application
+- Fraud and identity agent: ID document verification, synthetic identity detection, application consistency check — 2 to 3 minutes, flags require human review
+- Policy engine (deterministic): applies credit policy rules to structured agent outputs, generates decision and ECOA-compliant reason codes — under 30 seconds, fully deterministic
+
+The policy engine is not an AI model. It's a rules engine. Your credit policy team owns and maintains it. Changes go through your existing change management process. The AI agents improve the quality and coverage of the inputs. The policy engine makes the decision.
+
+## Real Numbers From a 90-Day Pilot
+
+A US online lender processing personal loans from $5,000 to $50,000 ran the four-agent pipeline in parallel with manual underwriting across 2,400 applications:
+
+- Median time-to-decision for complete applications: 3.2 days → 3.7 hours
+- Applications with document issues requiring re-submission: 22% → 8% (the ingestion agent caught missing items at intake)
+- Underwriter review time per file: 4.1 hours → 47 minutes (structured agent outputs replaced manual data compilation)
+
+The alternative data agent identified 14% of FICO-declined applications as creditworthy based on 24 months of bank statement cash flow patterns. Of those, 91% remained current at the 6-month performance review.
+
+A 2025 survey of 31 US fintech lenders running AI in underwriting found that automated document processing reduced cost-per-originated-loan by $340 on average, and that lenders using alternative data through AI pipelines approved 23% more applications with equivalent or lower 90-day default rates compared to pre-AI baseline.
+
+## Where the Value Is — and Where the Risk Isn't
+
+The bias and explainability risk that CCOs and Chief Credit Officers raise is real. But it sits in the decision layer. Design the architecture so AI never touches the decision layer, and you've solved the problem structurally.
+
+Your pipeline is bottlenecked at data preparation, not decision-making. Your underwriters spend most of their time assembling information so they can spend a fraction of it applying judgment.
+
+An agentic pipeline handles the assembly. Your team does the work only they can do.
+
+---
+
+🔗 Want the full breakdown?
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 Building an AI underwriting pipeline?
+Connect with Codiste — we scope and build AI agent pipelines for fintech lenders that need deterministic compliance on the decision layer and intelligent automation on data preparation. Reach us at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗬𝗼𝘂𝗿 𝘂𝗻𝗱𝗲𝗿𝘄𝗿𝗶𝘁𝗲𝗿𝘀 𝘀𝗽𝗲𝗻𝗱 𝗺𝗼𝘀𝘁 𝗼𝗳 𝘁𝗵𝗲𝗶𝗿 𝗱𝗮𝘆 𝗮𝘀𝘀𝗲𝗺𝗯𝗹𝗶𝗻𝗴 𝗱𝗮𝘁𝗮 — 𝗻𝗼𝘁 𝗮𝗽𝗽𝗹𝘆𝗶𝗻𝗴 𝗷𝘂𝗱𝗴𝗺𝗲𝗻𝘁.
+The 4-agent lending pipeline that cuts time-to-decision from 3 days to 4 hours → [article link]
+
+#FintechLending #AIUnderwriting #CreditDecisioning #LendingAutomation #FintechAI
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~760 words
+• Estimated read time: 3 min
+• Remember to: add the blog URL in the CTA
+• Target audience: Chief Credit Officers, CCOs, CTO/CPO at fintech lenders, neobanks with lending products
+• Best posting time: Tuesday–Thursday, 7–9am EST
