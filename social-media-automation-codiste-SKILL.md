@@ -786,41 +786,12 @@ Swipe through →
 
 ## Adding Images to Slides (Cover or Content)
 
-### Two ways to get an image
+### One way to get an image
 
 **Option A — User uploads:** PNG/JPG appears in `/mnt/user-data/uploads/`. Base64 encode and embed.
 
-**Option B — Generate via Freepik Mystic:** When no image is uploaded AND content benefits from a cover visual, call `freepik:text_to_image_mystic_sync`.
 
-### AI image prompt recipe
-```
-"Monochrome black and white cinematic illustration of [TOPIC CONCEPT],
-minimalist composition, high contrast, chrome and metallic textures,
-circuit board patterns, abstract tech elements, dark background,
-professional editorial style, no text, no logos, no bright colours,
-silver and white tones on pure black"
 
-Parameters:
-- model: "super_real" or "fluid"
-- aspect_ratio: "horizontal_2_1"
-- resolution: "2k"
-- styling: none
-```
-
-**Always include:** "no text", "no logos", "black and white" / "monochrome", "dark background".
-
-### Generation workflow
-```python
-result = freepik_text_to_image_mystic_sync(
-    prompt="...",
-    aspect_ratio="horizontal_2_1",
-    model="super_real"
-)
-import urllib.request
-urllib.request.urlretrieve(result['image_url'], '/home/claude/cover_generated.png')
-with open('/home/claude/cover_generated.png', 'rb') as f:
-    img_b64 = base64.b64encode(f.read()).decode()
-```
 
 ### Image requirements
 - **B&W or monochrome only** — colour clashes with `#010101/#FAFAFA/#868686`
