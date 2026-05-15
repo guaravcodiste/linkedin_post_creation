@@ -1,0 +1,59 @@
+TITLE: AI Agents for RegTech: The Audit Trail Auditors Actually Check
+
+CAPTION:
+𝗔𝗜 𝗔𝗴𝗲𝗻𝘁𝘀 𝗳𝗼𝗿 𝗥𝗲𝗴𝗧𝗲𝗰𝗵: 𝗧𝗵𝗲 𝗔𝘂𝗱𝗶𝘁 𝗧𝗿𝗮𝗶𝗹 𝗔𝘂𝗱𝗶𝘁𝗼𝗿𝘀 𝗔𝗰𝘁𝘂𝗮𝗹𝗹𝘆 𝗖𝗵𝗲𝗰𝗸
+→ Build compliance systems that audit themselves: codiste.com/book-a-call
+
+---
+
+ARTICLE:
+
+Your compliance team spends two months before every FINRA examination reconstructing what your systems did. The systems your engineers built to screen sanctions, flag anomalies, and process KYC applications were never designed to explain themselves. That reconstruction burden is not a compliance problem. It is an architecture problem — and AI agents fix it at the root.
+
+Agentic compliance systems built on deterministic memory produce a self-auditing ledger as a byproduct of normal operations. Every KYC decision, every AML flag, every sanctions check is logged with its complete reasoning chain, timestamped, and retrievable in the exact format SOC 2 and FINRA examiners request. No reconstruction required.
+
+**Why AI Hallucination Anxiety Targets the Wrong Risk**
+
+Boards raise AI hallucination concerns every quarter. The concern is legitimate but mislocated. Regulators do not penalize organizations because their AI occasionally produces an incorrect output — every control system has failure modes. What examiners verify is whether your organization can:
+
+- Detect that a failure occurred
+- Prove controls were in place to catch it
+- Produce the remediation path with documented evidence
+
+A FINRA examiner reviewing an AML escalation does not care that your model was right 99.7% of the time. They want the decision record for the specific transaction they are examining — the input state at the time of the decision, the policy version that was active, the intermediate reasoning steps, and the final output.
+
+Traditional ML models produce a score. The score is the output. There is no preserved memory of why the model weighted one feature over another on that transaction. A 2024 Deloitte survey found that 67% of financial services firms cite inability to explain AI decisions as their top barrier to regulatory approval for automated compliance systems. The fix is not better explainability tooling bolted onto an opaque model. It is building agents where the reasoning trace is the primary output from the start.
+
+**Three Memory Layers That Satisfy Every Audit Category**
+
+Agentic compliance systems built correctly operate on three distinct memory layers, each serving a different audit function:
+
+- **Working memory** holds the current task context — the specific customer record, the active transaction set, the policy version in effect. Every read and write is timestamped and logged
+- **Episodic memory** records completed decisions: the input state at decision time, the policy version applied, all intermediate reasoning steps, and the final output. This is the primary artifact FINRA examiners query when they request a specific decision file
+- **Semantic memory** holds the policy corpus, versioned with effective dates. When a policy changes, the prior version is archived with its active date range. When an examiner asks why a 2023 transaction was flagged under then-current AML typologies, the agent replays the decision against the 2023 policy — not today's updated version
+
+Auditors do not read raw log files. They query structured, versioned, policy-linked ledgers. This three-layer architecture produces exactly that — not as an add-on, but as the operational substrate the system runs on.
+
+**What This Architecture Delivers for a Neobank at Scale**
+
+A US neobank processing 40,000 account openings per month runs KYC through a four-agent pipeline. The intake agent standardizes the application and writes a structured customer record to working memory. The document verification agent runs OCR, compares it against the application record, and flags discrepancies. The sanctions screening agent queries OFAC and internal watchlists, recording each match or no-match with the exact list version checked. The decision agent applies the KYC policy ruleset and outputs pass, fail, or manual review.
+
+Every agent writes to episodic memory at completion. Each application generates 47 discrete logged events on average. An examiner requesting the KYC file for any account receives a structured export in under 90 seconds. Before this architecture, the compliance team spent three hours per file assembling records across four disconnected systems.
+
+The hallucination risk is isolated by design. The decision agent cannot output a result that contradicts what the upstream agents logged in episodic memory. The ledger is the ground truth. Every downstream agent reads from it — it cannot write outcomes that diverge from verified upstream inputs.
+
+The SOC 2 and FINRA controls that examiners check map directly to this structure:
+
+- Access and authorization logs → working memory access records with user and role attribution
+- Decision audit trail → episodic memory per transaction or customer action
+- Policy version control → semantic memory with effective date ranges
+- Anomaly detection and escalation → agent escalation triggers with reasoning trace preserved
+- Data lineage → input provenance recorded in working memory at ingest
+
+No item on this list requires custom tooling built after the fact. Each is a structural property of how the agents were built.
+
+**Your next examination should be a lookup, not a reconstruction.**
+
+The audit trail is a byproduct of how a properly built agentic compliance system operates. We scope and build regulated agentic systems for US fintechs and neobanks — the controls are in the architecture from day one, not assembled before exam season.
+
+Book a Technical Assessment → codiste.com/book-a-call
