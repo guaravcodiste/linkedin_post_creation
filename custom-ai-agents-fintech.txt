@@ -1,0 +1,96 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+Custom AI Agents for US Fintech: The Architecture That Matters
+
+KEYWORDS TO USE AS HASHTAGS:
+#FintechAI #AIAgents #RegulatedAI #ComplianceArchitecture #AIInFintech
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+Your infrastructure team just spent three weeks evaluating OpenAI Assistants API. The output was a working demo. The problem: it runs on a public model endpoint, retains conversation state in a vendor cloud you don't control, and has no mechanism for the data residency documentation your Chief Compliance Officer needs before it can touch production customer data.
+
+Generic AI is not the gap. Regulated architecture is.
+
+## The Architectural Line That Actually Matters
+
+Custom AI agent development for US fintech means two things that matter for regulated workloads. First, the model never sees raw customer PII — inputs are preprocessed, pseudonymized where required, and the model operates on structured representations. Second, the agent's memory layer runs on your infrastructure, not a vendor's cloud.
+
+This is the line between a productivity tool and a production-grade regulated system. Most fintech CTOs arrive at this decision after a vendor POC fails a security review, not before. Building it right from the start costs less than rebuilding after a failed audit.
+
+Regulated agent architecture has six structural properties:
+
+- The model inference endpoint is isolated from the data layer
+- Customer data never leaves your VPC for inference
+- Decision outputs write to an immutable audit log before propagating downstream
+- Policy configuration is versioned and tied to each decision record
+- Access to the agent's memory layer is governed by your existing IAM controls
+- The system produces SOC 2 Type II control artifacts as a byproduct of normal operation
+
+## The 5-Layer Reference Architecture
+
+Every production-ready regulated fintech AI agent follows a five-layer stack:
+
+- Orchestration layer — manages agent task flow, retry logic, and escalation triggers (satisfies OCC SR 11-7 model governance)
+- Inference proxy — routes prompts to the model endpoint, strips PII before transmission (CCPA, GLBA data handling)
+- Memory and state layer — stores working state, episodic decision records, and the policy corpus (SOC 2 audit trail, FINRA retention)
+- Data adapter layer — connects to core banking, CRM, and KYC systems via read-only APIs (least-privilege access, data lineage)
+- Output and routing layer — validates model output, applies business rules, routes to downstream systems (SR 11-7 output validation)
+
+Each layer is independently testable. A change to the inference proxy doesn't require re-certification of the memory layer. This modularity is what makes the architecture operationally maintainable — not just initially certifiable.
+
+## The Stack That Separates Production From a Demo
+
+LangGraph is the right orchestration choice for regulated fintech agents. Not because it's the most capable framework in isolation, but because its state graph architecture makes memory management explicit at the design level. Memory is a first-class citizen in the graph — and explicit memory is auditable memory.
+
+For inference: GPT-4o with an Azure OpenAI enterprise agreement satisfies most US fintech data residency requirements. Llama 3 or Mistral self-hosted on AWS or GCP gives zero data egress at higher infrastructure cost. The right choice depends on your data classification policy, not model capability benchmarks.
+
+Policy versioning runs on a vector database — Pinecone, Weaviate, or pgvector — with AML typologies, KYC thresholds, and policy documents embedded and version-archived. Realistic timeline: 8 to 12 weeks from architecture sign-off to first production deployment, then 4 weeks of parallel running before cutover.
+
+## What Leaks When You Use the Wrong Architecture
+
+The failure mode isn't catastrophic. It's quiet and expensive.
+
+A fintech using a generic AI platform for compliance-adjacent tasks typically discovers the problem at its first SOC 2 audit or FINRA examination. The auditor asks for a decision record. The system can't produce it — the intermediate reasoning, the input state, and the policy version were never stored.
+
+- 65% of fintechs report their first AI audit required significant manual reconstruction of records (Fintech Compliance Technology Benchmark, 2025)
+- Direct reconstruction cost: $180,000 to $420,000 at a mid-size neobank
+- Three US fintechs received CFPB inquiry letters in 2024 over customer data transmitted to third-party model endpoints
+
+The second leak is data. Generic AI platforms retain prompt data for model improvement unless you have explicit enterprise opt-out terms. For a fintech processing customer financial data, that's a CCPA and GLBA exposure.
+
+## Build Before the Audit Arrives
+
+A demo is not an architecture. Your next FINRA examination or SOC 2 audit will expose the difference between the two.
+
+The gap isn't in your AI model. It's in whether the system surrounding it can prove what it did when the examination team arrives.
+
+---
+
+🔗 Want the full breakdown?
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 Building something in fintech AI?
+Connect with Codiste — we help US fintechs design, build, and scale regulated AI agent systems. Every component you own. Reach us at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗬𝗼𝘂𝗿 𝗔𝗜 𝗱𝗲𝗺𝗼 𝗽𝗮𝘀𝘀𝗲𝗱 𝘁𝗵𝗲 𝘁𝗲𝗰𝗵 𝗿𝗲𝘃𝗶𝗲𝘄. 𝗜𝘁 𝘄𝗼𝗻'𝘁 𝗽𝗮𝘀𝘀 𝘁𝗵𝗲 𝗰𝗼𝗺𝗽𝗹𝗶𝗮𝗻𝗰𝗲 𝗮𝘂𝗱𝗶𝘁.
+The 5-layer architecture that separates regulated fintech AI from a vendor POC → [article link]
+
+#FintechAI #AIArchitecture #RegTech #ComplianceFirst #AIInFintech
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~780 words
+• Estimated read time: 3 min
+• Remember to: add the blog URL in the CTA
+• Target audience: CTOs, CISOs, Chief Compliance Officers at US fintechs and neobanks
+• Best posting time: Tuesday–Thursday, 7–9am EST
