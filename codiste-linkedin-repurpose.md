@@ -25,43 +25,6 @@ This skill handles the **complete pipeline** in one session, fully autonomously:
  
 ---
  
-## ASSETS — Always Load From Project Folder
- 
-**The assets folder is permanently seeded.** All four required assets are confirmed to live at `/mnt/skills/user/codiste-linkedin-repurpose/assets/` as of April 2026. **Never ask the user to upload fonts or the logo — they are already there.** The user has explicitly requested zero asset-upload interrupts.
- 
-```
-ASSETS = '/mnt/skills/user/codiste-linkedin-repurpose/assets/'
-```
- 
-| Asset | Path |
-|---|---|
-| Logo (white version) | `ASSETS + 'c_white_claude__2_.png'` |
-| Font Regular | `ASSETS + 'Satoshi-Regular.otf'` |
-| Font Bold | `ASSETS + 'Satoshi-Bold.otf'` |
-| Font Medium | `ASSETS + 'Satoshi-Medium.otf'` |
- 
-**Loading code (used in the compositor):**
-```python
-import os
-ASSETS = '/mnt/skills/user/codiste-linkedin-repurpose/assets/'
-UPLOADS = '/mnt/user-data/uploads/'
- 
-def find_asset(name):
-    """Load from ASSETS folder. Uploads is a defensive fallback only —
-    the assets folder is seeded and should always have the files."""
-    for base in [ASSETS, UPLOADS]:
-        p = base + name
-        if os.path.exists(p):
-            return p
-    raise FileNotFoundError(f"Asset {name} not found — assets folder may have been wiped, ask user to re-upload")
- 
-required = ['c_white_claude__2_.png', 'Satoshi-Regular.otf', 'Satoshi-Bold.otf', 'Satoshi-Medium.otf']
-```
- 
-**Only ask the user to upload assets if the assets folder has been wiped AND uploads is empty** — i.e., a true catastrophic loss. This is a recovery path, not a normal flow. If you are tempted to ask for assets in a normal session, you are wrong; the files are there.
- 
----
- 
 ## INTAKE FLOW — How to Decide What to Do
  
 When a request comes in, classify it into one of these:
@@ -367,6 +330,8 @@ AI image generators frequently hallucinate text/labels. Always include explicit 
 - Describe only the visual scene for the left panel
 - NEVER mention "right half white", "split composition", "white background", or any layout in the Freepik prompt
 - The right panel (white, title, logo, codiste.com) is handled entirely by Python — NOT by the image model
+
+
 #### Recommended Freepik settings
  
 ```
@@ -382,30 +347,10 @@ creative_detailing: 40       # balanced detail without HDR over-render
 1. freepik:create_image_mystic(...) → returns task_id
 2. Wait 30 seconds (sleep)
 3. freepik:get_mystic_task_status(task-id) → check until COMPLETED
-4. Download the URL via curl with a brief retry loop
-   (Freepik CDN sometimes 503s for ~10–20s after generation)
+4. Download the images using task id using download tool freepik and use it for further.
 5. View the image to verify no text artifacts
 6. If text/glitches present → regenerate with stronger anti-text wording
    AND no part-names mentioned in the prompt
-```
- 
-#### Download retry pattern
- 
-```bash
-# Freepik CDN returns 503 ("DNS cache overflow") for ~30-60s after generation.
-# Real-world testing: ~50s of cumulative backoff was needed.
-# Use a retry loop, NOT a single 15s sleep.
-URL='URL_FROM_TASK_STATUS'
-for i in 1 2 3 4 5; do
-  sleep 20
-  curl -sL -o /home/claude/freepik_hero.png "$URL"
-  ftype=$(file /home/claude/freepik_hero.png)
-  echo "attempt $i: $ftype"
-  if echo "$ftype" | grep -q "PNG image"; then
-    echo "✅ got PNG"; break
-  fi
-done
-# If still ASCII text after 5 attempts → re-poll get_mystic_task_status for a refreshed URL
 ```
  
 ### Step 10 — Composite the Banner
@@ -414,6 +359,7 @@ Once the hero image is downloaded and verified:
 - Use the confirmed article title — never ask for it again
 - Load fonts + logo from ASSETS folder (with uploads fallback)
 - Auto-fit BOTH lines (Line 1 Regular and Line 2 Bold), wrap to multiple lines if needed
+
 #### Title Splitting Rule
  
 Split title at the natural `:` colon point.
@@ -463,10 +409,10 @@ ox, oy = (dw - 1200) // 2, (dh - H) // 2
 hero_panel = hero_resized.crop((ox, oy, ox + 1200, oy + H))
  
 # ── Logo — white pixels on black → render black on white ──────
-# c_white_claude__2_.png = black background + white logo artwork
+# c_white_claude_2.png = black background + white logo artwork
 # Extract R>200 pixels (white logo art) → render as black [1,1,1,255]
-# NEVER use c_black_claude__2_.png — fully black, unusable
-logo_src = Image.open(find_asset('c_white_claude__2_.png')).convert('RGBA')
+# NEVER use c_black_claude (2).png — fully black, unusable
+logo_src = Image.open(find_asset('c_white_claude_2.png')).convert('RGBA')
 arr_l = np.array(logo_src)
 rgba_l = np.zeros((arr_l.shape[0], arr_l.shape[1], 4), dtype=np.uint8)
 rgba_l[arr_l[:, :, 0] > 200] = [1, 1, 1, 255]
@@ -642,11 +588,11 @@ Step 11: Deliver PNG + JPG via present_files
 | codiste.com | Satoshi-Medium.otf | 36px (-2% letter spacing) |
  
 ### Logo
-- **File:** `c_white_claude__2_.png` from ASSETS — ONLY this file
+- **File:** `c_white_claude_2.png` from ASSETS — ONLY this file
 - **Method:** Extract pixels where R > 200 → render as black [1,1,1,255]
 - **Always crop to bbox before resizing** (removes transparent padding so the rendered logo isn't undersized)
 - **Position:** Top-right, 80px tall, 64px from right, 52px from top
-- **NEVER use** `c_black_claude__2_.png` — fully black, no extraction possible
+- **NEVER use** `c_black_claude (2).png` — fully black, no extraction possible
 - Both logo files have NO transparency — never rely on alpha channel for masking
 ### Layout
 ```
@@ -694,7 +640,7 @@ Step 11: Deliver PNG + JPG via present_files
 - ❌ Never skip the banner phase — it's part of the workflow, not optional
 - ❌ Never wait for user to ask for the banner — start hero generation right after article delivery
 - ❌ Never ask for the title again before compositing — use confirmed title
-- ❌ Never use `c_black_claude__2_.png` for the logo
+- ❌ Never use `c_black_claude (2).png` for the logo
 - ❌ Never use `arr[:,:,0] > 0` for logo extraction — always `> 200`
 - ❌ Never skip the `getbbox()` crop on the logo
 - ❌ Never use fonts other than Satoshi
@@ -741,13 +687,13 @@ If the user asks for any of these, explain plainly that the skill outputs a read
 8. **Auto-fit both lines independently.** Long Line 2 needs to wrap to 2–3 lines. Long Line 1 may also need wrapping when the pre-colon setup is long.
 9. **Caption = meta-insight, not summary.** Line 1 introduces an angle the article doesn't cover. The reader should feel like clicking gives them more, not a recap.
 10. **Don't fake capabilities.** If asked for posting/scheduling/browser actions, say plainly the skill can't do it. Offer the manual alternative. Never pretend.
-11. **Logo always needs `getbbox()` crop before resize** — `c_white_claude__2_.png` has transparent padding that makes the rendered logo too small if not cropped first.
+11. **Logo always needs `getbbox()` crop before resize** — `c_white_claude_2.png` has transparent padding that makes the rendered logo too small if not cropped first.
 12. **Already-written article = skip Phase 1.** When user says "I have my article, just give me the banner", don't re-write or re-pitch.
 13. **Word count 700–800 sweet spot.** Don't go over 800 words — articles past that underperform on LinkedIn. Run the Quality Checklist (Step 6) before every delivery.
 14. **Subheadings must be fresh.** Never use the source's subheadings verbatim — always rephrase with a LinkedIn-friendly angle.
 15. **Caption examples by topic exist for a reason.** Use the closest matching one as tone reference instead of inventing a new style every time.
 16. **Title is automatic in compositor.** When the hero is ready, composite immediately — don't ask for the title again.
-17. **Logo = `c_white_claude__2_.png` only.** R>200 extraction → black on white. Both logo files have no transparency.
+17. **Logo = `c_white_claude_2.png` only.** R>200 extraction → black on white. Both logo files have no transparency.
 ---
  
 ## Project Folder Structure
@@ -756,7 +702,7 @@ If the user asks for any of these, explain plainly that the skill outputs a read
 /mnt/skills/user/codiste-linkedin-repurpose/
     ├── SKILL.md                    ← this file
     └── assets/
-        ├── c_white_claude__2_.png  ← Codiste logo (white version)
+        ├── c_white_claude_2.png  ← Codiste logo (white version)
         ├── Satoshi-Regular.otf     ← Line 1 font
         ├── Satoshi-Bold.otf        ← Line 2 font
         └── Satoshi-Medium.otf      ← codiste.com font
