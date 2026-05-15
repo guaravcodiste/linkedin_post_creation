@@ -1,228 +1,121 @@
 ---
-name: social-media-automation-codiste
+name: carousel-generation-workflow
 description: >
-  Generate on-brand Codiste social media carousels (Instagram, LinkedIn) from user content
-  like blogs, video scripts, or notes. FULLY AUTONOMOUS: triggers include "create carousel,
-  this is my content", "make a carousel from this", "turn this into a carousel", "make a
-  post about X", "create slides for this". On trigger, runs the full pipeline without
-  questions: reads content, writes 9-slide universal copy (no plagiarism), picks the right
-  template per slide from a 15-template library (stat, pull quote, comparison table, step
-  cards, question, definition, framework, split, checklist, bullets, cover, CTA), designs
-  all slides using the Codiste brand system (black #010101, white #FAFAFA, grey #868686,
-  Satoshi font embedded as base64, grid background, real logo PNG, 1080x1350px), generates
-  LinkedIn + Instagram + Twitter captions, exports PNGs + captions.md. Supports
-  user-uploaded B&W cover images via base64.
+  Complete end-to-end autonomous workflow for generating Codiste-branded LinkedIn/Instagram
+  carousel images from Google Sheet content. Covers: reading sheet data via n8n, building
+  9-slide carousels in Python + Playwright, pushing to GitHub, uploading to Google Drive,
+  and sending Google Chat notification. Only includes conditions and code that are confirmed
+  to work in production.
 ---
 
-# Social Media Automation — Codiste
+# Codiste Carousel Generation — Full Workflow
 
-You are the Codiste Social Media Designer. When activated, you **immediately execute the full pipeline autonomously** — no questions, no approval checkpoints. Read content → pick the right template per slide → design → generate captions → export. One shot.
+**Fully autonomous.** Read sheet → build slides → render PNGs → commit/push → upload to Drive → notify Google Chat.
 
 ---
 
-## Autonomous Mode (how this skill behaves)
+## Environment (Confirmed Working)
 
-### Trigger phrases
-Activate when the user says any of:
-- "create carousel, this is my content" + pastes content
-- "make a carousel from this", "turn this into a carousel", "i want to create a carousel"
-- Asks for a social media post, carousel, or branded visual for Codiste
-- Pastes a blog, video script, or any raw content and asks to repurpose it
-
-### What Claude does on trigger
-Run the full pipeline end to end with **zero questions, zero approval checkpoints, zero option menus**:
-
-1. Read content → extract universal insights (no specific demos copied)
-2. Write 9-slide copy (hook → value → CTA)
-3. **Pick the right template per slide using the mapping rule below** — never default-stack bullets
-4. Design all 9 slides using the Codiste brand system
-5. Generate `captions.md` (LinkedIn + Instagram + Twitter)
-6. Export PNGs + captions
-7. Present everything via `present_files`
-
-### Template selection rule (CRITICAL)
-Look at what the slide content actually is. Match it to the right template **before** reaching for bullets. Bullets are the fallback, not the default.
-
-| If the slide content is... | Use template |
+| Item | Path / Value |
 |---|---|
-| A single number, %, or metric | **G** Stat |
-| A direct quote with attribution | **H** Pull Quote |
-| Two things being directly compared | **I** Comparison Table |
-| A sequence of 3-5 ordered steps | **J** Step Cards |
-| A provocative question or rhetorical setup | **K** Question |
-| A term being defined | **L** Definition |
-| A simple relationship between 3-4 concepts | **M** Framework |
-| Before vs after, or X vs Y dichotomy | **N** Split |
-| A list of completable tasks or criteria | **O** Checklist |
-| A list of 3-5 peer items (genuine list) | **C / D** Bullets |
-| A bold thesis or punchline | **A** Bold Statement |
-| A pitch close | **F** CTA |
-
-A 9-slide carousel should typically use **4-5 different template types**, never 7 bullet slides in a row.
-
-### Default choices Claude makes autonomously
-- **Slide count:** 9 (adjust only if content clearly demands 5 or 7)
-- **Cover:** Always Template A (Bold Statement)
-- **CTA close:** Always Template F
-- **Slides 2-8:** Driven by the mapping rule above. Mix templates aggressively — readers scrolling through 9 same-shape slides tune out.
-- **Light/dark rhythm:** Still alternates. Never 3+ same-background slides in a row.
-- **Headline voice:** short, punchy, under 8 words
-- **Colour palette:** strict `#010101 / #FAFAFA / #868686` only
-- **Tone:** scroll-stopping hook, educational body, clear CTA
-
-### When to pause (only these cases)
-- Content is genuinely unreadable or missing (corrupted file, empty paste)
-- User explicitly asks to review copy first
-- Safety concern (content promotes harm)
-
-### After delivery
-User can request edits ("change slide 3 headline", "use a stat slide for slide 5", "remove that bullet"). Claude makes the edit, re-renders only the affected slide(s), and presents again.
-
-### What Claude does NOT do
-- Does not ask for approval on copy or template choice before designing
-- Does not ask which template to use, how many slides, or which colours
-- Does not show a side-by-side preview before exporting (preview fonts can't match the exported file)
-- Does not wait for user to ask for captions — they ship every time
-- **Does not default to bullets** for every middle slide — bullets are a fallback for genuine lists
+| Repo dir (fonts + logos) | `/home/user/linkedin_post_creation/` |
+| Slide HTML workspace | `/home/claude/` |
+| Outputs dir | `/mnt/user-data/outputs/` |
+| Chromium executable | `/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` |
+| Playwright version | `1.43.0` (matches chromium-1194) |
+| GitHub branch | `claude/cool-tesla-UYzOH` (current working branch) |
 
 ---
 
-## The Autonomous Pipeline (Steps 1–7)
+## n8n Workflow IDs
 
-### Step 1 — Read content & extract universal insights
-Parse the provided content. Extract the 7 most useful **universal** concepts (not specific demos from someone else's work — see "Universal Content Rule" below). Rewrite everything in your own punchy voice.
+| Workflow | ID |
+|---|---|
+| Read LinkedIn Sheet Data & Github (Carousel) | `01VGbkQh9V5Cz8DQ` |
+| Upload AI Agent Carousel to Google Drive | `QMMl6ELpEz0wfbaW` |
 
-### Step 2 — Write 9-slide copy structure with template assignments
-- **Slide 1:** Hook cover (Template A, dark)
-- **Slides 2-8:** Apply the mapping rule. Each slide gets a template based on its content type. Aim for 4-5 different template types across the middle 7 slides.
-- **Slide 9:** CTA close (Template F, dark)
+**Google Drive folder ID:** `1pM75JINX2pud4fZ-Wk82S1zzSH9dI7mT`
 
-### Step 3 — Build the Python script
-Write a single `build_*.py` file in `/home/claude/` that contains:
-1. Base64 font embedding (Regular 400, Bold 700, Black 900 from bundled `assets/fonts/`)
-2. Base64 logo embedding (white + black PNGs from bundled `assets/logo/`)
-3. Grid overlay CSS constants
-4. `head(bg, grid_css)` helper
-5. All template helpers needed for this carousel (`bullet`, `stat_slide`, `comparison_slide`, etc.)
-6. `slide1()` and `slide9()` functions for cover and CTA
-7. Write all 9 HTML files to `/home/claude/slide_XX.html`
+**Google Chat webhook:**
+`https://chat.googleapis.com/v1/spaces/AAQAT72CHuU/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=meuLGzxAlDIIlSDFTG7skunMSeC6N2QPIZaqS93-93M`
 
-(See "Implementation Snippets" and "Slide Variety Library" below for exact code.)
+---
 
-### Step 4 — Render PNGs with Playwright
-See snippet in Implementation Snippets.
+## STEP 1 — Read Sheet Data via n8n
 
-### Step 5 — Clean old outputs, copy new ones
-```bash
-rm -f /mnt/user-data/outputs/slide_*.png /mnt/user-data/outputs/*captions*.md
-cp /home/claude/slide_*.png /mnt/user-data/outputs/
+Execute workflow `01VGbkQh9V5Cz8DQ` in manual mode. It reads the **Carousel Content** tab from the Codiste Automation Google Sheet and also fetches the GitHub repo metadata.
+
+```
+executionMode: manual
+workflowId: 01VGbkQh9V5Cz8DQ
 ```
 
-### Step 6 — Generate `captions.md`
-Create `<topic>_captions.md` in outputs with 3 platform versions (LinkedIn long-form, Instagram medium, Twitter single + thread). Follow the no-em-dash rule. See "Caption Generation" below for full format.
+**Output:** Each row in the sheet is one carousel to produce. Fields returned:
+- `row_number` — row index (start from 2)
+- `Content Source` — full article/blog text to repurpose into carousel slides
 
-### Step 7 — Present all files
-Call `present_files` with: `captions.md` first, then `slide_01` through `slide_09`.
-
-Done.
+**Process rows sequentially:** complete the full pipeline for row 1 (build → render → push → upload → notify), then start row 2.
 
 ---
 
-## Language & Style Rules (STRICT)
+## STEP 2 — Analyse Content & Plan 9 Slides
 
-These apply to slide copy AND captions:
+Read the `Content Source` text. Extract universal insights — do NOT copy specific demos or examples verbatim. Rewrite everything in punchy, original voice.
 
-- **NEVER use em dashes (—).** Use colons `:`, commas `,`, or periods `.` instead.
-- **Headlines:** under 6 words ideally, max 8.
-- **Sentence case** for headlines; UPPERCASE only for small labels with letter-spacing.
-- **Hierarchy:** Grey for setup/context → White or Black bold for the punchline. Always.
-- **Bullets:** 3–5 words ideally, max 8–10.
-- **Labels:** 2–3 words, UPPERCASE, 3px letter-spacing.
+**Determine topic slug** (lowercase, underscores, max 5 words):
+- Example: `hire_ai_agent_dev_saas_skills`
 
----
+### Slide structure
+- **Slide 1:** Always Template A (Bold Statement), **Dark**
+- **Slides 2–8:** Choose template per content type using the mapping below
+- **Slide 9:** Always Template F (CTA), **Dark**
 
-## Brand System
+### Template selection rule
 
-### Colors
-| Token | Hex | Use |
-|---|---|---|
-| Black | `#010101` | Dark backgrounds, text on light |
-| White | `#FAFAFA` | Light backgrounds, text on dark |
-| Grey | `#868686` | Muted text, dividers, decorative |
+| If the slide content is… | Use |
+|---|---|
+| A single stat, %, or metric | **G — Stat** |
+| A direct quote with attribution | **H — Pull Quote** |
+| Two things being compared side by side | **I — Comparison Table** |
+| A sequence of 3–5 ordered steps | **J — Step Cards** |
+| A provocative question or rhetorical hook | **K — Question** |
+| A term being defined | **L — Definition** |
+| A linear flow of 3–4 connected concepts | **M — Framework** |
+| Before vs after / X vs Y dichotomy | **N — Before/After Split** |
+| A list of tasks, criteria, or audit items | **O — Checklist** |
+| A list of 3–5 peer items (genuine list) | **C / D — Bullets** |
+| A bold thesis or opening punchline | **A — Bold Statement** |
+| Final pitch / call to action | **F — CTA** |
 
-**No other colors. Ever.** (Except CTA gradient: `linear-gradient(135deg,#222,#383838)`)
+**Rule:** Use 4–5 different template types across the 9 slides. Never stack 7 bullet slides in a row.
 
-### Typography — Satoshi (embedded as base64)
-- `.otf` files bundled in `assets/fonts/`:
-  - `Satoshi-Regular.otf` (400)
-  - `Satoshi-Bold.otf` (700)
-  - `Satoshi-Black.otf` (900)
-  - Plus Light 300, Medium 500, and italic variants
-- Read from bundled assets, encode to base64, embed via `@font-face` in every slide HTML.
-- **Never use external font URLs** — network is off during Playwright rendering.
-
-### Canvas
-- Size: **1080 × 1350px** (portrait 4:5)
-- Padding: **64px** all sides minimum
-- Grid overlay: always present, subtle
-- Logo: top-left, every slide (white on dark, black on light)
-
-### Decorative Elements
-- **Asterisk `*`:** large, top-right, opacity 0.04, pure BG color
-- **Arrow `→` (light) or `↗` (dark):** bottom-right
-- **CTA pill button:** Template F only — dark gradient + white text + `↗`
-
-### Typographic Hierarchy
-| Element | Size | Weight | Color | Notes |
-|---|---|---|---|---|
-| Labels (top) | 28px | 700 | `#868686` | UPPERCASE, 3px letter-spacing |
-| Headlines | 80–100px | 900 | black on light / white on dark | -2px letter-spacing |
-| Body / Bullets | 44–46px | 400 | matches BG contrast | line-height 1.35 |
-| Bullet dots | 8×8px | — | `#868686` | 22px margin-top to align with text |
+### Light/dark rhythm
+- Alternate light and dark backgrounds
+- Never 3+ same-background slides in a row
+- Slide 1 = Dark, Slide 9 = Dark
 
 ---
 
-## Slide Templates (full library)
+## STEP 3 — Build the Python Script
 
-| Template | Use for | Background |
-|---|---|---|
-| **A — Bold Statement** | Cover, punchy quote, hook | Dark `#010101` |
-| **B — Split Text** | Two-part contrast in one block | Light `#FAFAFA` |
-| **C — Two-Col List** | Bullet features, tips, lists | Light `#FAFAFA` |
-| **D — Two-Col Dark** | Comparison, dark bullet list | Dark `#010101` |
-| **E — Step Card (legacy)** | Step-by-step process inline | Light or Dark |
-| **F — CTA Close** | Final slide, "Connect with us" | Dark `#010101` |
-| **G — Stat** | Single number/% as the slide | Either |
-| **H — Pull Quote** | Direct quote with attribution | Dark preferred |
-| **I — Comparison Table** | Two things side-by-side | Light preferred |
-| **J — Step Cards** | Numbered process, 3-5 cards | Either |
-| **K — Question** | Single bold question filling canvas | Either |
-| **L — Definition** | Term + meaning, dictionary style | Either |
-| **M — Framework** | 3-4 concepts in connected boxes | Either |
-| **N — Before/After Split** | X vs Y, before vs after | Hybrid |
-| **O — Checklist** | Tasks, criteria, audit items | Either |
+Create `/home/claude/build_{topic_slug}.py`.
 
-**Alternate light/dark slides for visual rhythm.** Never 3+ same-background slides in a row.
+### 3a — Asset setup (CONFIRMED WORKING paths)
 
----
-
-## Implementation Snippets
-
-### Font embedding
 ```python
-import base64
+import base64, asyncio, shutil, os
 from pathlib import Path
 
-SKILL_DIR = Path('/mnt/skills/user/social-media-automation-codiste')
-FONTS_DIR = SKILL_DIR / 'assets' / 'fonts'
+REPO_DIR = Path('/home/user/linkedin_post_creation')
 
 def b64(path):
     with open(path, 'rb') as f:
         return base64.b64encode(f.read()).decode()
 
-r400 = b64(FONTS_DIR / 'Satoshi-Regular.otf')
-r700 = b64(FONTS_DIR / 'Satoshi-Bold.otf')
-r900 = b64(FONTS_DIR / 'Satoshi-Black.otf')
+# Fonts — loaded from repo root
+r400 = b64(REPO_DIR / 'Satoshi-Regular.otf')
+r700 = b64(REPO_DIR / 'Satoshi-Bold.otf')
+r900 = b64(REPO_DIR / 'Satoshi-Black.otf')
 
 FONT_FACE = f"""
 @font-face {{font-family:'Satoshi';font-weight:400;src:url('data:font/otf;base64,{r400}') format('opentype');}}
@@ -231,25 +124,24 @@ FONT_FACE = f"""
 """
 ```
 
-### Logo embedding
-Bundled at `assets/logo/`:
-- `c_black_claude.png` — for DARK backgrounds
-- `c_white_claude.png` — for LIGHT backgrounds
-
-Both are 932×1000px **transparent PNGs** (NOT JPG).
+### 3b — Logo setup (CRITICAL — file meaning is opposite to their names)
 
 ```python
-LOGO_DIR = SKILL_DIR / 'assets' / 'logo'
-LOGO_WHITE_B64 = b64(LOGO_DIR / 'c_black_claude.png')
-LOGO_BLACK_B64 = b64(LOGO_DIR / 'c_white_claude.png')
+# VERIFIED by pixel analysis (May 2026):
+# c_white_claude.png → avg Red channel = 250 → WHITE logo pixels → use on DARK backgrounds
+# c_black_claude.png → avg Red channel = 1   → BLACK logo pixels → use on LIGHT backgrounds
+# The SKILL.md variable names (LOGO_WHITE_B64, LOGO_BLACK_B64) are MISLEADING — ignore them.
+# Use the mapping below — it is confirmed correct.
 
-LOGO_DARK = f'<img src="data:image/png;base64,{LOGO_WHITE_B64}" style="position:absolute;top:60px;left:64px;width:48px;height:51px;object-fit:contain;z-index:10;" />'
-LOGO_LIGHT = f'<img src="data:image/png;base64,{LOGO_BLACK_B64}" style="position:absolute;top:60px;left:64px;width:48px;height:51px;object-fit:contain;z-index:10;" />'
+LOGO_FOR_DARK  = b64(REPO_DIR / 'c_white_claude.png')   # white logo on dark slide
+LOGO_FOR_LIGHT = b64(REPO_DIR / 'c_black_claude.png')   # black logo on light slide
+
+LOGO_DARK  = f'<img src="data:image/png;base64,{LOGO_FOR_DARK}" style="position:absolute;top:60px;left:64px;width:48px;height:51px;object-fit:contain;z-index:10;" />'
+LOGO_LIGHT = f'<img src="data:image/png;base64,{LOGO_FOR_LIGHT}" style="position:absolute;top:60px;left:64px;width:48px;height:51px;object-fit:contain;z-index:10;" />'
 ```
 
-Always `data:image/png;base64,` (never `image/jpeg`). Always `top:60px; left:64px; z-index:10;`.
+### 3c — Shared helpers
 
-### Grid overlay CSS
 ```python
 GRID_DARK = """
 .grid{position:absolute;inset:0;pointer-events:none;z-index:1;
@@ -263,10 +155,7 @@ background-image:linear-gradient(rgba(0,0,0,0.04) 1px,transparent 1px),
 linear-gradient(90deg,rgba(0,0,0,0.04) 1px,transparent 1px);
 background-size:54px 54px;}
 """
-```
 
-### Shared helpers (every script needs these)
-```python
 def head(bg, grid_css):
     return f"""<!DOCTYPE html><html><head><meta charset="utf-8"><style>
 {FONT_FACE}
@@ -276,188 +165,190 @@ body{{font-family:'Satoshi',sans-serif;background:{bg};position:relative;}}
 {grid_css}
 </style></head><body>"""
 
-ASTERISK_DARK = '<div style="position:absolute;top:30px;right:50px;font-size:280px;font-weight:900;color:#1a1a1a;line-height:1;z-index:1;font-family:Satoshi,sans-serif;">*</div>'
+ASTERISK_DARK  = '<div style="position:absolute;top:30px;right:50px;font-size:280px;font-weight:900;color:#1a1a1a;line-height:1;z-index:1;font-family:Satoshi,sans-serif;">*</div>'
 ASTERISK_LIGHT = '<div style="position:absolute;top:30px;right:50px;font-size:280px;font-weight:900;color:#efefef;line-height:1;z-index:1;font-family:Satoshi,sans-serif;">*</div>'
 
-ARROW_DARK = '<div style="position:absolute;bottom:60px;right:64px;font-size:48px;font-weight:400;color:#FAFAFA;z-index:5;">↗</div>'
-ARROW_LIGHT = '<div style="position:absolute;bottom:60px;right:64px;font-size:48px;font-weight:400;color:#010101;z-index:5;">→</div>'
+ARROW_DARK  = '<div style="position:absolute;bottom:60px;right:64px;font-size:48px;font-weight:400;color:#FAFAFA;z-index:5;">&#8599;</div>'
+ARROW_LIGHT = '<div style="position:absolute;bottom:60px;right:64px;font-size:48px;font-weight:400;color:#010101;z-index:5;">&#8594;</div>'
 
 def label(txt):
     return f'<div style="font-size:28px;font-weight:700;color:#868686;letter-spacing:3px;text-transform:uppercase;">{txt}</div>'
-```
 
-### Bullet list pattern (Templates C / D)
-Always use a grey circle dot (not em dash, not hyphen):
-
-```python
 def bullet(text, dark=False):
     fg = '#FAFAFA' if dark else '#010101'
-    return f"""
-<div style="display:flex;align-items:flex-start;gap:24px;margin-bottom:34px;">
+    return f"""<div style="display:flex;align-items:flex-start;gap:24px;margin-bottom:34px;">
   <div style="width:8px;height:8px;border-radius:50%;background:#868686;flex-shrink:0;margin-top:22px;"></div>
   <div style="font-size:44px;font-weight:400;color:{fg};line-height:1.35;">{text}</div>
-</div>
-"""
+</div>"""
 ```
-
-### Render PNGs with Playwright
-```python
-import asyncio
-from playwright.async_api import async_playwright
-
-async def render():
-    async with async_playwright() as p:
-        browser = await p.chromium.launch()
-        for i in range(1, 10):
-            page = await browser.new_page(viewport={'width': 1080, 'height': 1350})
-            await page.goto(f'file:///home/claude/slide_{i:02d}.html')
-            await page.wait_for_timeout(1000)  # let embedded fonts load
-            await page.screenshot(path=f'/home/claude/slide_{i:02d}.png',
-                                  full_page=False, type='png')
-        await browser.close()
-
-asyncio.run(render())
-```
-
-The 1000ms wait is required — without it the screenshot can fire before base64 fonts apply, and you'll get a system-font fallback baked into the PNG.
 
 ---
 
-## Slide Variety Library — Code Patterns
+## STEP 4 — Slide Template Reference (All Working Templates)
 
-All helpers below assume the shared helpers above (`head`, `LOGO_DARK`, `LOGO_LIGHT`, `ASTERISK_DARK`, `ASTERISK_LIGHT`, `ARROW_DARK`, `ARROW_LIGHT`, `label`) are already defined.
-
-### Template G — Stat slide
-For a single number that deserves the whole canvas.
+### Template A — Bold Statement (Cover / Dark)
+Use for: Cover hook, punchy single thesis.
 
 ```python
-def stat_slide(label_text, big_number, supporting_line, dark=False):
+def slide_cover(label_text, grey_line, white_headline, footer_line):
+    return head('#010101', GRID_DARK) + f"""
+{LOGO_DARK}
+{ASTERISK_DARK}
+<div class="grid"></div>
+<div style="position:absolute;top:180px;left:64px;right:64px;z-index:5;">
+  {label(label_text)}
+</div>
+<div style="position:absolute;top:310px;left:64px;right:64px;z-index:5;">
+  <div style="font-size:60px;font-weight:400;color:#868686;line-height:1.25;margin-bottom:28px;">{grey_line}</div>
+  <div style="font-size:98px;font-weight:900;color:#FAFAFA;line-height:1.0;letter-spacing:-3px;">{white_headline}</div>
+</div>
+<div style="position:absolute;bottom:130px;left:64px;right:120px;z-index:5;">
+  <div style="font-size:34px;font-weight:400;color:#868686;">{footer_line}</div>
+</div>
+{ARROW_DARK}
+</body></html>"""
+```
+
+---
+
+### Template F — CTA Close (Dark)
+Use for: Slide 9 always.
+
+```python
+def slide_cta(label_text, grey_setup, white_headline, button_text, url_text):
+    return head('#010101', GRID_DARK) + f"""
+{LOGO_DARK}
+{ASTERISK_DARK}
+<div class="grid"></div>
+<div style="position:absolute;top:180px;left:64px;right:64px;z-index:5;">
+  {label(label_text)}
+</div>
+<div style="position:absolute;top:310px;left:64px;right:64px;z-index:5;">
+  <div style="font-size:50px;font-weight:400;color:#868686;line-height:1.3;margin-bottom:36px;">{grey_setup}</div>
+  <div style="font-size:92px;font-weight:900;color:#FAFAFA;line-height:1.0;letter-spacing:-3px;">{white_headline}</div>
+</div>
+<div style="position:absolute;bottom:230px;left:64px;z-index:10;">
+  <div style="display:inline-flex;align-items:center;gap:16px;background:linear-gradient(135deg,#222,#383838);color:#FAFAFA;font-size:34px;font-weight:700;padding:22px 46px;border-radius:60px;letter-spacing:-0.5px;">{button_text} &#8599;</div>
+</div>
+<div style="position:absolute;bottom:130px;left:64px;font-size:30px;color:#868686;z-index:5;">{url_text}</div>
+{ARROW_DARK}
+</body></html>"""
+```
+
+---
+
+### Template G — Stat (Dark or Light)
+Use for: A single number/% that deserves the whole slide.
+
+```python
+def stat_slide(label_text, big_number, supporting_line, dark=True):
     bg = '#010101' if dark else '#FAFAFA'
     fg = '#FAFAFA' if dark else '#010101'
-    grid_class = GRID_DARK if dark else GRID_LIGHT
+    grid_css = GRID_DARK if dark else GRID_LIGHT
     logo = LOGO_DARK if dark else LOGO_LIGHT
     asterisk = ASTERISK_DARK if dark else ASTERISK_LIGHT
     arrow = ARROW_DARK if dark else ARROW_LIGHT
-    return head(bg, grid_class) + f"""
+    return head(bg, grid_css) + f"""
 {logo}
 {asterisk}
 <div class="grid"></div>
-
 <div style="position:absolute;top:200px;left:64px;right:64px;z-index:5;">
   {label(label_text)}
 </div>
-
-<div style="position:absolute;top:480px;left:64px;right:64px;z-index:5;">
-  <div style="font-size:280px;font-weight:900;color:{fg};line-height:1;letter-spacing:-8px;">{big_number}</div>
+<div style="position:absolute;top:400px;left:64px;right:64px;z-index:5;">
+  <div style="font-size:260px;font-weight:900;color:{fg};line-height:1;letter-spacing:-8px;">{big_number}</div>
 </div>
-
-<div style="position:absolute;top:880px;left:64px;right:64px;z-index:5;">
-  <div style="font-size:48px;font-weight:400;color:#868686;line-height:1.3;max-width:880px;">{supporting_line}</div>
+<div style="position:absolute;top:840px;left:64px;right:80px;z-index:5;">
+  <div style="font-size:46px;font-weight:400;color:#868686;line-height:1.35;">{supporting_line}</div>
 </div>
-
 {arrow}
-</body></html>
-"""
+</body></html>"""
 ```
 
-**Use when:** "$5/month VPS", "71% handoff rate", "From 4 hours to 23 minutes".
+---
 
-### Template H — Pull Quote slide
-For a direct quote strong enough to carry the slide alone.
+### Template H — Pull Quote (Dark preferred)
+Use for: A direct quote strong enough to carry the whole slide.
 
 ```python
 def quote_slide(label_text, quote_text, attribution, dark=True):
     bg = '#010101' if dark else '#FAFAFA'
     fg = '#FAFAFA' if dark else '#010101'
-    quote_mark_color = '#1a1a1a' if dark else '#efefef'
-    grid_class = GRID_DARK if dark else GRID_LIGHT
+    qmark_color = '#1a1a1a' if dark else '#efefef'
+    grid_css = GRID_DARK if dark else GRID_LIGHT
     logo = LOGO_DARK if dark else LOGO_LIGHT
     asterisk = ASTERISK_DARK if dark else ASTERISK_LIGHT
     arrow = ARROW_DARK if dark else ARROW_LIGHT
-    return head(bg, grid_class) + f"""
+    return head(bg, grid_css) + f"""
 {logo}
 {asterisk}
 <div class="grid"></div>
-
 <div style="position:absolute;top:200px;left:64px;right:64px;z-index:5;">
   {label(label_text)}
 </div>
-
-<div style="position:absolute;top:300px;left:48px;font-size:380px;font-weight:900;color:{quote_mark_color};line-height:1;font-family:Satoshi,serif;z-index:2;">"</div>
-
+<div style="position:absolute;top:300px;left:48px;font-size:380px;font-weight:900;color:{qmark_color};line-height:1;z-index:2;">"</div>
 <div style="position:absolute;top:560px;left:64px;right:64px;z-index:5;">
   <div style="font-size:64px;font-weight:700;color:{fg};line-height:1.2;letter-spacing:-1px;">{quote_text}</div>
 </div>
-
 <div style="position:absolute;bottom:140px;left:64px;right:64px;z-index:5;">
   <div style="font-size:32px;font-weight:400;color:#868686;letter-spacing:1px;">— {attribution}</div>
 </div>
-
 {arrow}
-</body></html>
-"""
+</body></html>"""
 ```
 
-**Use when:** Customer testimonial, founder statement, expert quote.
+---
 
-### Template I — Comparison Table slide
-For two things side-by-side. Real grid, not pretend bullets.
+### Template I — Comparison Table (Light preferred)
+Use for: Two things directly compared side by side.
 
 ```python
 def comparison_slide(label_text, headline, left_title, left_items, right_title, right_items, dark=False):
     bg = '#010101' if dark else '#FAFAFA'
     fg = '#FAFAFA' if dark else '#010101'
     divider = '#333' if dark else '#dadada'
-    grid_class = GRID_DARK if dark else GRID_LIGHT
+    grid_css = GRID_DARK if dark else GRID_LIGHT
     logo = LOGO_DARK if dark else LOGO_LIGHT
     asterisk = ASTERISK_DARK if dark else ASTERISK_LIGHT
     arrow = ARROW_DARK if dark else ARROW_LIGHT
 
-    def col(title, items):
+    def col(title, items, title_color):
         rows = ''.join(
-            f'<div style="font-size:32px;font-weight:400;color:{fg};line-height:1.4;padding:18px 0;border-bottom:1px solid {divider};">{x}</div>'
-            for x in items
-        )
-        return f"""
-<div style="flex:1;">
-  <div style="font-size:36px;font-weight:900;color:{fg};margin-bottom:24px;letter-spacing:-1px;">{title}</div>
+            f'<div style="font-size:30px;font-weight:400;color:{fg};line-height:1.4;padding:15px 0;border-bottom:1px solid {divider};">{x}</div>'
+            for x in items)
+        return f"""<div style="flex:1;">
+  <div style="font-size:28px;font-weight:900;color:{title_color};margin-bottom:18px;letter-spacing:2px;text-transform:uppercase;">{title}</div>
   {rows}
-</div>
-"""
+</div>"""
 
-    return head(bg, grid_class) + f"""
+    return head(bg, grid_css) + f"""
 {logo}
 {asterisk}
 <div class="grid"></div>
-
-<div style="position:absolute;top:200px;left:64px;right:64px;z-index:5;">
+<div style="position:absolute;top:180px;left:64px;right:64px;z-index:5;">
   {label(label_text)}
-  <div style="margin-top:30px;font-size:72px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{headline}</div>
+  <div style="margin-top:26px;font-size:74px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{headline}</div>
 </div>
-
-<div style="position:absolute;top:560px;left:64px;right:64px;z-index:5;display:flex;gap:60px;">
-  {col(left_title, left_items)}
+<div style="position:absolute;top:570px;left:64px;right:64px;z-index:5;display:flex;gap:56px;">
+  {col(left_title, left_items, "#868686")}
   <div style="width:1px;background:{divider};"></div>
-  {col(right_title, right_items)}
+  {col(right_title, right_items, fg)}
 </div>
-
 {arrow}
-</body></html>
-"""
+</body></html>"""
 ```
 
-**Use when:** Two products, two approaches, two camps.
+---
 
-### Template J — Step Cards slide
-For sequences. Each step gets its own numbered block.
+### Template J — Step Cards (Light or Dark)
+Use for: A numbered sequence of 3–4 ordered steps.
 
 ```python
 def step_slide(label_text, headline, steps, dark=False):
-    """steps = [(title, body), ...] usually 3 items."""
+    # steps = [(title_str, body_str), ...]
     bg = '#010101' if dark else '#FAFAFA'
     fg = '#FAFAFA' if dark else '#010101'
-    num_color = '#868686'
-    grid_class = GRID_DARK if dark else GRID_LIGHT
+    grid_css = GRID_DARK if dark else GRID_LIGHT
     logo = LOGO_DARK if dark else LOGO_LIGHT
     asterisk = ASTERISK_DARK if dark else ASTERISK_LIGHT
     arrow = ARROW_DARK if dark else ARROW_LIGHT
@@ -465,117 +356,102 @@ def step_slide(label_text, headline, steps, dark=False):
     cards = ''
     for i, (title, body) in enumerate(steps, 1):
         cards += f"""
-<div style="margin-bottom:40px;display:flex;gap:32px;align-items:flex-start;">
-  <div style="font-size:80px;font-weight:900;color:{num_color};line-height:1;letter-spacing:-2px;min-width:100px;">0{i}</div>
+<div style="margin-bottom:30px;display:flex;gap:28px;align-items:flex-start;">
+  <div style="font-size:60px;font-weight:900;color:#868686;line-height:1;letter-spacing:-2px;min-width:76px;">0{i}</div>
   <div style="flex:1;">
-    <div style="font-size:40px;font-weight:700;color:{fg};line-height:1.2;margin-bottom:8px;">{title}</div>
-    <div style="font-size:30px;font-weight:400;color:#868686;line-height:1.35;">{body}</div>
+    <div style="font-size:36px;font-weight:700;color:{fg};line-height:1.2;margin-bottom:6px;">{title}</div>
+    <div style="font-size:28px;font-weight:400;color:#868686;line-height:1.35;">{body}</div>
   </div>
-</div>
-"""
+</div>"""
 
-    return head(bg, grid_class) + f"""
+    return head(bg, grid_css) + f"""
 {logo}
 {asterisk}
 <div class="grid"></div>
-
-<div style="position:absolute;top:200px;left:64px;right:64px;z-index:5;">
+<div style="position:absolute;top:180px;left:64px;right:64px;z-index:5;">
   {label(label_text)}
-  <div style="margin-top:30px;font-size:72px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{headline}</div>
+  <div style="margin-top:26px;font-size:74px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{headline}</div>
 </div>
-
-<div style="position:absolute;top:560px;left:64px;right:64px;z-index:5;">
+<div style="position:absolute;top:530px;left:64px;right:64px;z-index:5;">
   {cards}
 </div>
-
 {arrow}
-</body></html>
-"""
+</body></html>"""
 ```
 
-**Use when:** "Build order", "How it works in 3 steps", numbered process.
+---
 
-### Template K — Question slide
-For a single provocative question filling the canvas. Pattern interrupt.
+### Template K — Question (Dark preferred)
+Use for: A single provocative question as a pattern interrupt. No asterisk — uses a large `?` instead.
 
 ```python
 def question_slide(label_text, question_text, dark=True):
     bg = '#010101' if dark else '#FAFAFA'
     fg = '#FAFAFA' if dark else '#010101'
-    mark_color = '#1a1a1a' if dark else '#efefef'
-    grid_class = GRID_DARK if dark else GRID_LIGHT
+    qmark_color = '#1a1a1a' if dark else '#efefef'
+    grid_css = GRID_DARK if dark else GRID_LIGHT
     logo = LOGO_DARK if dark else LOGO_LIGHT
     arrow = ARROW_DARK if dark else ARROW_LIGHT
-    return head(bg, grid_class) + f"""
+    return head(bg, grid_css) + f"""
 {logo}
 <div class="grid"></div>
-
-<div style="position:absolute;top:80px;right:60px;font-size:520px;font-weight:900;color:{mark_color};line-height:1;font-family:Satoshi,sans-serif;z-index:1;">?</div>
-
+<div style="position:absolute;top:80px;right:50px;font-size:520px;font-weight:900;color:{qmark_color};line-height:1;z-index:1;">?</div>
 <div style="position:absolute;top:200px;left:64px;right:64px;z-index:5;">
   {label(label_text)}
 </div>
-
-<div style="position:absolute;top:540px;left:64px;right:64px;z-index:5;">
-  <div style="font-size:96px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{question_text}</div>
+<div style="position:absolute;top:500px;left:64px;right:80px;z-index:5;">
+  <div style="font-size:86px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{question_text}</div>
 </div>
-
 {arrow}
-</body></html>
-"""
+</body></html>"""
 ```
 
-**Use when:** Hook slide, transition slide, "What if..." setup.
+---
 
-### Template L — Definition slide
-For introducing a term. Looks like a dictionary entry.
+### Template L — Definition (Dark or Light)
+Use for: Introducing a term in dictionary style.
 
 ```python
-def definition_slide(label_text, term, category, definition, dark=False):
+def definition_slide(label_text, term, category, definition, dark=True):
     bg = '#010101' if dark else '#FAFAFA'
     fg = '#FAFAFA' if dark else '#010101'
-    grid_class = GRID_DARK if dark else GRID_LIGHT
+    divider = '#333' if dark else '#dadada'
+    grid_css = GRID_DARK if dark else GRID_LIGHT
     logo = LOGO_DARK if dark else LOGO_LIGHT
     asterisk = ASTERISK_DARK if dark else ASTERISK_LIGHT
     arrow = ARROW_DARK if dark else ARROW_LIGHT
-    divider = '#333' if dark else '#dadada'
-    return head(bg, grid_class) + f"""
+    return head(bg, grid_css) + f"""
 {logo}
 {asterisk}
 <div class="grid"></div>
-
 <div style="position:absolute;top:200px;left:64px;right:64px;z-index:5;">
   {label(label_text)}
 </div>
-
-<div style="position:absolute;top:380px;left:64px;right:64px;z-index:5;">
-  <div style="font-size:120px;font-weight:900;color:{fg};line-height:1;letter-spacing:-3px;">{term}</div>
-  <div style="margin-top:12px;font-size:32px;font-weight:400;color:#868686;font-style:italic;">{category}</div>
+<div style="position:absolute;top:360px;left:64px;right:64px;z-index:5;">
+  <div style="font-size:98px;font-weight:900;color:{fg};line-height:1.0;letter-spacing:-3px;">{term}</div>
+  <div style="margin-top:14px;font-size:30px;font-weight:400;color:#868686;font-style:italic;">{category}</div>
 </div>
-
-<div style="position:absolute;top:740px;left:64px;right:64px;z-index:5;">
-  <div style="height:1px;background:{divider};margin-bottom:40px;"></div>
-  <div style="font-size:44px;font-weight:400;color:{fg};line-height:1.4;">{definition}</div>
+<div style="position:absolute;top:760px;left:64px;right:64px;z-index:5;">
+  <div style="height:1px;background:{divider};margin-bottom:36px;"></div>
+  <div style="font-size:40px;font-weight:400;color:{fg};line-height:1.4;">{definition}</div>
 </div>
-
 {arrow}
-</body></html>
-"""
+</body></html>"""
 ```
 
-**Use when:** Introducing a concept, jargon explainer, "what we mean by X".
+---
 
-### Template M — Framework diagram slide
-For a simple linear flow. Connected boxes.
+### Template M — Framework / Flow (Light or Dark)
+Use for: A simple linear flow of 3–4 connected concepts.
 
 ```python
 def framework_slide(label_text, headline, nodes, dark=False):
-    """nodes = [str, str, str] usually 3-4 boxes."""
+    # nodes = [str, str, str]
     bg = '#010101' if dark else '#FAFAFA'
     fg = '#FAFAFA' if dark else '#010101'
     box_bg = '#151515' if dark else '#ffffff'
     box_border = '#333' if dark else '#dadada'
-    grid_class = GRID_DARK if dark else GRID_LIGHT
+    grid_css = GRID_DARK if dark else GRID_LIGHT
     logo = LOGO_DARK if dark else LOGO_LIGHT
     asterisk = ASTERISK_DARK if dark else ASTERISK_LIGHT
     arrow = ARROW_DARK if dark else ARROW_LIGHT
@@ -586,74 +462,64 @@ def framework_slide(label_text, headline, nodes, dark=False):
 <div style="background:{box_bg};border:1px solid {box_border};border-radius:16px;padding:40px 36px;margin-bottom:20px;display:flex;align-items:center;gap:24px;">
   <div style="width:48px;height:48px;border-radius:50%;background:#868686;color:{bg};font-size:28px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;">{i+1}</div>
   <div style="font-size:42px;font-weight:700;color:{fg};line-height:1.2;">{node}</div>
-</div>
-"""
+</div>"""
         if i < len(nodes) - 1:
-            boxes += '<div style="text-align:center;font-size:36px;color:#868686;line-height:1;margin:-4px 0 16px 0;">↓</div>'
+            boxes += '<div style="text-align:center;font-size:36px;color:#868686;line-height:1;margin:-4px 0 16px 0;">&#8595;</div>'
 
-    return head(bg, grid_class) + f"""
+    return head(bg, grid_css) + f"""
 {logo}
 {asterisk}
 <div class="grid"></div>
-
-<div style="position:absolute;top:200px;left:64px;right:64px;z-index:5;">
+<div style="position:absolute;top:180px;left:64px;right:64px;z-index:5;">
   {label(label_text)}
-  <div style="margin-top:30px;font-size:72px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{headline}</div>
+  <div style="margin-top:26px;font-size:74px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{headline}</div>
 </div>
-
-<div style="position:absolute;top:560px;left:64px;right:64px;z-index:5;">
+<div style="position:absolute;top:530px;left:64px;right:64px;z-index:5;">
   {boxes}
 </div>
-
 {arrow}
-</body></html>
-"""
+</body></html>"""
 ```
 
-**Use when:** Process flow, decision tree, "X leads to Y leads to Z".
+---
 
-### Template N — Before/After Split slide
-For a clean dichotomy. Page divided in half.
+### Template N — Before/After Split (Light)
+Use for: X vs Y, wrong way vs right way.
 
 ```python
 def split_slide(label_text, headline, before_label, before_items, after_label, after_items):
-    """Always uses light BG with two dark side-by-side cards."""
     return head('#FAFAFA', GRID_LIGHT) + f"""
 {LOGO_LIGHT}
 <div class="grid"></div>
-
-<div style="position:absolute;top:200px;left:64px;right:64px;z-index:5;">
+<div style="position:absolute;top:180px;left:64px;right:64px;z-index:5;">
   {label(label_text)}
-  <div style="margin-top:30px;font-size:72px;font-weight:900;color:#010101;line-height:1.1;letter-spacing:-2px;">{headline}</div>
+  <div style="margin-top:26px;font-size:74px;font-weight:900;color:#010101;line-height:1.1;letter-spacing:-2px;">{headline}</div>
 </div>
-
-<div style="position:absolute;top:560px;left:64px;right:64px;bottom:140px;z-index:5;display:flex;gap:0;">
-  <div style="flex:1;background:#010101;padding:48px 40px;border-radius:20px 0 0 20px;">
-    <div style="font-size:24px;font-weight:700;color:#868686;letter-spacing:3px;text-transform:uppercase;margin-bottom:32px;">{before_label}</div>
-    {''.join(f'<div style="font-size:34px;font-weight:400;color:#FAFAFA;line-height:1.35;margin-bottom:20px;">{x}</div>' for x in before_items)}
+<div style="position:absolute;top:550px;left:64px;right:64px;bottom:110px;z-index:5;display:flex;gap:0;">
+  <div style="flex:1;background:#010101;padding:40px 36px;border-radius:20px 0 0 20px;">
+    <div style="font-size:22px;font-weight:700;color:#868686;letter-spacing:3px;text-transform:uppercase;margin-bottom:26px;">{before_label}</div>
+    {''.join(f'<div style="font-size:31px;font-weight:400;color:#FAFAFA;line-height:1.35;margin-bottom:18px;">{x}</div>' for x in before_items)}
   </div>
-  <div style="flex:1;background:#010101;padding:48px 40px;border-radius:0 20px 20px 0;border-left:1px solid #333;">
-    <div style="font-size:24px;font-weight:700;color:#FAFAFA;letter-spacing:3px;text-transform:uppercase;margin-bottom:32px;">{after_label}</div>
-    {''.join(f'<div style="font-size:34px;font-weight:400;color:#FAFAFA;line-height:1.35;margin-bottom:20px;">{x}</div>' for x in after_items)}
+  <div style="flex:1;background:#010101;padding:40px 36px;border-radius:0 20px 20px 0;border-left:1px solid #333;">
+    <div style="font-size:22px;font-weight:700;color:#FAFAFA;letter-spacing:3px;text-transform:uppercase;margin-bottom:26px;">{after_label}</div>
+    {''.join(f'<div style="font-size:31px;font-weight:400;color:#FAFAFA;line-height:1.35;margin-bottom:18px;">{x}</div>' for x in after_items)}
   </div>
 </div>
-
 {ARROW_LIGHT}
-</body></html>
-"""
+</body></html>"""
 ```
 
-**Use when:** Old way vs new way, problem state vs solution, with vs without.
+---
 
-### Template O — Checklist slide
-For action items, criteria, completable tasks.
+### Template O — Checklist (Light or Dark)
+Use for: Audit items, criteria, completable tasks.
 
 ```python
 def checklist_slide(label_text, headline, items, dark=False):
-    """items = [(text, checked_bool), ...]"""
+    # items = [(text_str, checked_bool), ...]
     bg = '#010101' if dark else '#FAFAFA'
     fg = '#FAFAFA' if dark else '#010101'
-    grid_class = GRID_DARK if dark else GRID_LIGHT
+    grid_css = GRID_DARK if dark else GRID_LIGHT
     logo = LOGO_DARK if dark else LOGO_LIGHT
     asterisk = ASTERISK_DARK if dark else ASTERISK_LIGHT
     arrow = ARROW_DARK if dark else ARROW_LIGHT
@@ -661,231 +527,425 @@ def checklist_slide(label_text, headline, items, dark=False):
     rows = ''
     for text, checked in items:
         if checked:
-            box = f'<div style="width:36px;height:36px;border-radius:6px;background:{fg};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:8px;"><div style="font-size:24px;font-weight:900;color:{bg};line-height:1;">✓</div></div>'
+            box = f'<div style="width:36px;height:36px;border-radius:6px;background:{fg};display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:8px;"><div style="font-size:22px;font-weight:900;color:{bg};line-height:1;">&#10003;</div></div>'
         else:
             box = f'<div style="width:36px;height:36px;border-radius:6px;border:2px solid #868686;flex-shrink:0;margin-top:8px;"></div>'
         rows += f"""
-<div style="display:flex;align-items:flex-start;gap:24px;margin-bottom:30px;">
+<div style="display:flex;align-items:flex-start;gap:24px;margin-bottom:24px;">
   {box}
-  <div style="font-size:42px;font-weight:400;color:{fg};line-height:1.35;">{text}</div>
-</div>
-"""
+  <div style="font-size:37px;font-weight:400;color:{fg};line-height:1.35;">{text}</div>
+</div>"""
 
-    return head(bg, grid_class) + f"""
+    return head(bg, grid_css) + f"""
 {logo}
 {asterisk}
 <div class="grid"></div>
-
-<div style="position:absolute;top:200px;left:64px;right:64px;z-index:5;">
+<div style="position:absolute;top:180px;left:64px;right:64px;z-index:5;">
   {label(label_text)}
-  <div style="margin-top:30px;font-size:72px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{headline}</div>
+  <div style="margin-top:26px;font-size:74px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{headline}</div>
 </div>
-
-<div style="position:absolute;top:560px;left:64px;right:64px;z-index:5;">
+<div style="position:absolute;top:540px;left:64px;right:64px;z-index:5;">
   {rows}
 </div>
-
 {arrow}
-</body></html>
-"""
+</body></html>"""
 ```
 
-**Use when:** Audit list, requirements, "are you doing all 5?", quality checklist.
+---
+
+### Templates C / D — Two-Column Bullets (Light / Dark)
+Use for: A genuine list of 3–5 peer items. Fallback only — not the default.
+
+```python
+def bullets_slide(label_text, headline, bullets_list, dark=False):
+    bg = '#010101' if dark else '#FAFAFA'
+    fg = '#FAFAFA' if dark else '#010101'
+    grid_css = GRID_DARK if dark else GRID_LIGHT
+    logo = LOGO_DARK if dark else LOGO_LIGHT
+    asterisk = ASTERISK_DARK if dark else ASTERISK_LIGHT
+    arrow = ARROW_DARK if dark else ARROW_LIGHT
+
+    items_html = ''.join(bullet(b, dark=dark) for b in bullets_list)
+
+    return head(bg, grid_css) + f"""
+{logo}
+{asterisk}
+<div class="grid"></div>
+<div style="position:absolute;top:180px;left:64px;right:64px;z-index:5;">
+  {label(label_text)}
+  <div style="margin-top:26px;font-size:74px;font-weight:900;color:{fg};line-height:1.1;letter-spacing:-2px;">{headline}</div>
+</div>
+<div style="position:absolute;top:540px;left:64px;right:64px;z-index:5;">
+  {items_html}
+</div>
+{arrow}
+</body></html>"""
+```
 
 ---
 
-## Universal Content Rule (blog/video repurposing)
+## STEP 5 — Write HTML Files and Render PNGs
 
-When the user provides a video script, blog post, or any content where someone else has documented specific demos or use cases:
+```python
+# Write HTML
+slides = [slide_01, slide_02, slide_03, slide_04, slide_05, slide_06, slide_07, slide_08, slide_09]
+for i, fn in enumerate(slides, 1):
+    with open(f'/home/claude/slide_{i:02d}.html', 'w') as f:
+        f.write(fn())
+    print(f"Written slide_{i:02d}.html")
 
-**DO NOT copy their specific examples verbatim.** It looks like plagiarism and damages brand credibility.
+# Render with Playwright — MUST use explicit executable path
+CHROMIUM_EXEC = '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell'
 
-**Extract only universal, general truths:**
+async def render():
+    from playwright.async_api import async_playwright
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(executable_path=CHROMIUM_EXEC)
+        for i in range(1, 10):
+            page = await browser.new_page(viewport={'width': 1080, 'height': 1350})
+            await page.goto(f'file:///home/claude/slide_{i:02d}.html')
+            await page.wait_for_timeout(1500)   # required — lets base64 fonts load
+            await page.screenshot(path=f'/home/claude/slide_{i:02d}.png', full_page=False, type='png')
+            print(f"Rendered slide_{i:02d}.png")
+        await browser.close()
 
-| ❌ Don't say (specific) | ✅ Do say (universal) |
-|---|---|
-| "It jailbroke Gemma 4 in 8 prompts" | "It handles complex multi-step tasks" |
-| "Built a Mandarin video with TTS and HTML" | "Generates content end to end" |
-| "Scraped Hacker News to JSON in 1 min" | "Research and data scraping" |
+asyncio.run(render())
 
-**The test:** If a stranger who hasn't watched the source could reasonably say the same thing from general knowledge about the topic, it's safe. If the bullet could only come from that specific video/blog, it's plagiarism risk.
+# Clean old outputs and copy new ones
+os.makedirs('/mnt/user-data/outputs', exist_ok=True)
+for f in Path('/mnt/user-data/outputs').glob('slide_*.png'):
+    f.unlink()
+
+for i in range(1, 10):
+    shutil.copy(f'/home/claude/slide_{i:02d}.png', f'/mnt/user-data/outputs/slide_{i:02d}.png')
+    print(f"Copied slide_{i:02d}.png")
+```
 
 ---
 
-## Caption Generation (always include)
+## STEP 6 — Generate Captions File
 
-Every carousel export ships with a `captions.md` file containing LinkedIn, Instagram, and Twitter/X versions.
+Save as `/mnt/user-data/outputs/{topic_slug}_captions.md`.
 
-### Caption rules
-- **No em dashes (—).** Use `:`, `,`, or period.
-- **Hook first** — first line stops the scroll. Question, bold stat, or pattern interrupt.
-- **Conversational** — no "In today's fast-paced world".
-- **Match the carousel's core insight** — tease it, don't give the whole thing away.
-- **End with a CTA** that matches slide 9.
-- **Hashtags at the end only**, never mid-body.
-
-### Platform formats
-
-**LinkedIn (1300–1800 chars)**
-- 1-line scroll-stopper hook
-- 2-3 short paragraphs expanding problem/insight
-- 3-5 bullet takeaways (• or →)
-- Strong CTA with context ("DM us", "Comment below")
-- 3-5 hashtags
-- Generous line breaks
-
-**Instagram (800–1500 chars)**
-- Hook line + emoji (max 2-3 emoji total)
-- Short punchy paragraphs
-- Mini bullet list (• or numbers)
-- CTA: "Save this post", "Share with a founder"
-- 15-20 hashtags in one block at end
-- "Swipe through →" early in the body
-
-**Twitter / X**
-- Single tweet under 280 chars with main insight
-- Optional 5-7 tweet thread version
-- Max 1-2 hashtags
-- CTA to profile/link
-
-### Output file structure
-Save as `/mnt/user-data/outputs/<topic>_captions.md`:
+### Format
 
 ```markdown
 # Carousel Captions
+## Topic: [topic title]
+
+---
 
 ## LinkedIn
-[long-form caption]
-
-#AI #PromptEngineering #Codiste
+[1300–1800 chars]
+- Hook line (first line must stop the scroll)
+- 2–3 short paragraphs
+- 3–5 bullet takeaways (• or →)
+- Strong CTA
+- 3–5 hashtags
 
 ---
 
 ## Instagram
-[medium caption]
-
-Swipe through →
-
-#ai #promptengineering #codiste #aitools #...
+[800–1500 chars]
+- Hook + emoji (max 2–3 emoji total)
+- Short punchy paragraphs
+- "Swipe through →" early
+- CTA: "Save this post"
+- 15–20 hashtags in one block at end
 
 ---
 
 ## Twitter / X
 
-**Single tweet:**
-[short hook tweet]
+**Single tweet:** [under 280 chars]
 
 **Thread version:**
 1/ [hook]
 2/ [point]
-3/ [point]
-4/ [CTA]
+...
+7/ [CTA]
 ```
+
+### Caption rules
+- **No em dashes (—).** Use `:`, `,`, or period.
+- Hook first — first line stops the scroll.
+- Conversational, not corporate.
+- Tease the carousel's insight; don't recap it fully.
+- End with a CTA matching slide 9.
+- Hashtags at the end only.
 
 ---
 
-## Adding Images to Slides (Cover or Content)
+## STEP 7 — Rename Files with Topic Prefix and Commit to GitHub
 
-### One way to get an image
+```bash
+TOPIC="hire_ai_agent_dev_saas_skills"   # set per row
+mkdir -p outputs/${TOPIC}
 
-**Option A — User uploads:** PNG/JPG appears in `/mnt/user-data/uploads/`. Base64 encode and embed.
+for i in 01 02 03 04 05 06 07 08 09; do
+  cp /mnt/user-data/outputs/slide_${i}.png outputs/${TOPIC}/${TOPIC}_slide_${i}.png
+done
+cp /mnt/user-data/outputs/${TOPIC}_captions.md outputs/${TOPIC}/${TOPIC}_captions.md
 
-
-
-
-### Image requirements
-- **B&W or monochrome only** — colour clashes with `#010101/#FAFAFA/#868686`
-- **Wide aspect ratios (2:1 or 16:9)** for cover slides
-- **Match BG tone** — dark image on dark slide, light on light
-- **Always base64 embed** — never external URLs (network is off during render)
-
-### Cover slide layout with image
-```
-┌─────────────────────────────────────┐
-│ [Codiste Logo]         *            │
-│                                     │
-│ LABEL (28px grey uppercase)         │
-│                                     │
-│ ┌─────────────────────────────────┐ │
-│ │      [IMAGE — 952px wide]       │ │
-│ │      rounded corners +          │ │
-│ │      subtle white border        │ │
-│ └─────────────────────────────────┘ │
-│                                     │
-│ Grey headline line 1                │
-│ Grey headline line 2                │
-│ White headline punchline            │
-│                                  →  │
-└─────────────────────────────────────┘
+git add outputs/
+git commit -m "Add ${TOPIC} carousel (9 slides + captions)"
+git push -u origin claude/cool-tesla-UYzOH
 ```
 
-Image wrapper:
-```html
-<div style="position:absolute;top:230px;left:64px;right:64px;z-index:10;
-            border-radius:20px;overflow:hidden;
-            border:1px solid rgba(255,255,255,0.1);">
-  <img src="data:image/png;base64,{img_b64}" style="width:100%;height:auto;display:block;" />
-</div>
-```
-
-Headline starts around `top:770-800px` depending on image height.
+**File naming convention:** `{topic_slug}_slide_01.png` through `{topic_slug}_slide_09.png` + `{topic_slug}_captions.md`
 
 ---
 
-## Edit Workflow (after delivery)
+## STEP 8 — Update n8n Upload Workflow and Execute
 
-When user requests edits ("remove this label", "switch slide 4 to a stat slide", "change em dash to colon"):
-1. Use `sed` or `str_replace` on the specific HTML file(s) in `/home/claude/`, or regenerate the slide with a different template helper
-2. Re-render only the affected slide(s) with Playwright
-3. Copy updated files to outputs (clean old ones first)
-4. Call `present_files` again
+Before executing, update the **Build File List** node in workflow `QMMl6ELpEz0wfbaW` to point to the correct GitHub branch and topic slug. Update the `jsCode`:
+
+```javascript
+const base = 'https://raw.githubusercontent.com/guaravcodiste/linkedin_post_creation/claude/cool-tesla-UYzOH/outputs/hire_ai_agent_dev_saas_skills';
+const topic = 'hire_ai_agent_dev_saas_skills';
+const files = [
+  topic + '_slide_01.png', topic + '_slide_02.png', topic + '_slide_03.png',
+  topic + '_slide_04.png', topic + '_slide_05.png', topic + '_slide_06.png',
+  topic + '_slide_07.png', topic + '_slide_08.png', topic + '_slide_09.png',
+  topic + '_captions.md'
+];
+return files.map(name => ({
+  json: {
+    fileName: name,
+    url: base + '/' + name,
+    mimeType: name.endsWith('.png') ? 'image/png' : 'text/markdown'
+  }
+}));
+```
+
+Then execute:
+```
+executionMode: manual
+workflowId: QMMl6ELpEz0wfbaW
+```
+
+Wait for `status: success`. The workflow:
+1. Downloads all 10 files from GitHub raw URL
+2. Uploads each to Google Drive folder `1pM75JINX2pud4fZ-Wk82S1zzSH9dI7mT`
+3. Sends a Google Chat notification (runs once via `executeOnce: true`)
 
 ---
 
-## Quality Checklist (run before presenting)
+## STEP 9 — Confirm and Present
 
-- [ ] Only `#010101`, `#FAFAFA`, `#868686` used
-- [ ] Real Satoshi embedded as base64 from bundled `assets/fonts/`
-- [ ] Real Codiste logo embedded as base64 from bundled `assets/logo/` (white on dark, black on light, transparent PNG)
-- [ ] Grid overlay present and subtle on every slide
-- [ ] Grey label → bold headline → body hierarchy on every slide
-- [ ] Decorative element on every slide (asterisk + arrow, except Question slide which uses the `?`)
+- Check execution status via `get_execution` (status = `success`)
+- Send slides to user via `present_files` (captions.md first, then slide_01 through slide_09)
+- Report: Drive upload confirmed, Google Chat notification sent
+
+---
+
+## Brand System (Non-Negotiable)
+
+### Colors
+| Token | Hex | Use |
+|---|---|---|
+| Black | `#010101` | Dark backgrounds, text on light |
+| White | `#FAFAFA` | Light backgrounds, text on dark |
+| Grey | `#868686` | Labels, muted text, dividers, decorative |
+
+**No other colors.** CTA gradient only: `linear-gradient(135deg,#222,#383838)`.
+
+### Canvas
+- Size: **1080 × 1350 px** (portrait 4:5)
+- Padding: **64px** all sides minimum
+
+### Typography — Satoshi (base64 embedded per slide)
+| Use | File | Weight | Size |
+|---|---|---|---|
+| Labels | Satoshi-Bold.otf | 700 | 28px, UPPERCASE, 3px letter-spacing |
+| Headlines | Satoshi-Black.otf | 900 | 74–100px, -2px letter-spacing |
+| Body / bullets | Satoshi-Regular.otf | 400 | 44–46px, line-height 1.35 |
+
+Font files live at repo root `/home/user/linkedin_post_creation/Satoshi-*.otf`.
+
+### Logo
+| Slide type | File to use | Why |
+|---|---|---|
+| Dark background (`#010101`) | `c_white_claude.png` | White pixels (avg R=250) are visible on dark |
+| Light background (`#FAFAFA`) | `c_black_claude.png` | Black pixels (avg R=1) are visible on light |
+
+Position: `top:60px; left:64px; width:48px; height:51px; z-index:10`
+
+> **CRITICAL NOTE:** The original SKILL.md has the variable names swapped (`LOGO_WHITE_B64` reads `c_black_claude.png`). This is wrong. Always use the verified pixel values above to decide which file to load.
+
+### Decorative elements
+- **Asterisk `*`:** `position:absolute; top:30px; right:50px; font-size:280px; color:#1a1a1a (dark) / #efefef (light); z-index:1`
+- **Arrow `↗` (dark) / `→` (light):** `position:absolute; bottom:60px; right:64px; font-size:48px; z-index:5`
+- **Question slides:** replace asterisk with large `?` at `top:80px; right:50px; font-size:520px`
+
+### z-index stack (never change)
+| Layer | z-index |
+|---|---|
+| Grid overlay | 1 |
+| Asterisk / `?` | 1 |
+| Content blocks | 5 |
+| Logo | 10 |
+
+---
+
+## Language & Style Rules
+
+- **Never use em dashes (—).** Use `:`, `,`, or period.
+- **Headlines:** under 8 words, sentence case. UPPERCASE only for labels.
+- **Hierarchy:** Grey label → Grey setup/context → White/Black bold punchline.
+- **Bullet dots:** 8×8px grey circle (`border-radius:50%`), NOT em-dashes or hyphens.
+- **Labels:** 2–3 words, UPPERCASE, 3px letter-spacing, 28px, font-weight 700, `#868686`.
+
+---
+
+## Universal Content Rule
+
+When repurposing blogs or articles:
+- Extract universal insights only — do NOT copy specific demos or examples verbatim.
+- If a bullet could only come from that specific source article, it is a plagiarism risk. Remove it.
+- The test: "Could a knowledgeable person say this from general knowledge?" If yes, safe. If no, rewrite.
+
+---
+
+## Quality Checklist (Run Before Presenting)
+
+- [ ] Only `#010101`, `#FAFAFA`, `#868686` used (no other colors)
+- [ ] Satoshi embedded as base64 from repo root fonts
+- [ ] Logo: `c_white_claude.png` on dark slides, `c_black_claude.png` on light slides
+- [ ] Logo visible (z-index:10, position:absolute, correct file used)
+- [ ] Grid overlay present on every slide (subtle, pointer-events:none)
+- [ ] Label → headline → body hierarchy on every slide
+- [ ] Asterisk / `?` / decorative element on every slide
+- [ ] Arrow present on every slide (`↗` dark, `→` light)
 - [ ] Canvas exactly 1080×1350px
 - [ ] No em dashes (—) anywhere — slides or captions
 - [ ] Headlines short and punchy (under 8 words)
-- [ ] **Used 4-5 different template types across the 9 slides** — not 7 bullet slides in a row
-- [ ] **Each slide's template matches its content type** per the mapping rule
-- [ ] Individual PNG per slide exported
-- [ ] `captions.md` generated with LinkedIn + Instagram + Twitter
-- [ ] Captions follow no-em-dash rule and match the carousel's core insight
-- [ ] If cover image used: B&W/monochrome, base64 embedded
-- [ ] If repurposing from blog/video: all content is universal (no specific demos copied)
-- [ ] Old outputs cleaned before copying new files
+- [ ] 4–5 different template types across the 9 slides (not all bullets)
+- [ ] Light/dark alternation — never 3+ same-background slides in a row
+- [ ] Slide 1 = Template A (dark), Slide 9 = Template F (dark)
+- [ ] Playwright wait_for_timeout(1500) used — fonts load correctly before screenshot
+- [ ] Old outputs cleaned before copying new PNGs
+- [ ] Files renamed with `{topic_slug}_` prefix before committing
+- [ ] Files committed and pushed to correct branch
+- [ ] Captions MD generated (LinkedIn + Instagram + Twitter)
+- [ ] n8n upload workflow `Build File List` node updated to correct branch + topic slug
+- [ ] n8n upload workflow executed and status = `success`
+- [ ] Google Chat notification confirmed sent
 
 ---
 
-## Design Notes (lessons from prior runs)
+## Common Failures and Fixes
 
-1. **Fonts cannot load from external URLs** during Playwright rendering — network is off. Embed as base64 from bundled `assets/fonts/`.
-2. **Em dashes look awkward in body text** — use `:` or `,` or period.
-3. **Short headlines > long headlines** — break longer ones across 2–3 lines using grey-grey-white hierarchy.
-4. **Always clean old outputs** before copying new ones to prevent stale PNGs in the shared folder.
-5. **Cover images must be B&W/monochrome** — colour clashes with the strict palette.
-6. **Images base64 embedded**, never external URLs.
-7. **Never copy specific demos** from blogs/videos — keep everything universal.
-8. **Logo must be transparent PNG, never JPG** — JPG has no alpha and renders as a solid square on light slides. Always use bundled PNGs.
-9. **Content drives template, not rotation.** A stat goes on a Stat slide. A comparison goes on a Comparison Table. A quote goes on a Pull Quote. Bullets are the fallback for genuine peer-item lists, not the default.
-10. **A 9-slide deck should use 4-5 different template types.** Same-shape slides in a row make the deck feel monotonous and reduce retention. Vary the layout aggressively.
+| Failure | Cause | Fix |
+|---|---|---|
+| Logo not visible | Wrong logo file used (color invisible on bg) | `c_white_claude.png` → dark slides, `c_black_claude.png` → light slides |
+| Font renders as system font | Playwright took screenshot before fonts loaded | `wait_for_timeout(1500)` — never reduce below 1000ms |
+| Chromium not found | Playwright version mismatch with installed browser | Use explicit `executable_path='/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell'` |
+| n8n downloads wrong files | Build File List still pointing to old branch/topic | Update `jsCode` in Build File List node before every run |
+| Em dash renders badly | Used `—` in copy | Replace with `:`, `,`, or period |
+| All middle slides look the same | Used bullet template for everything | Apply the template mapping rule — vary 4–5 types |
+| Logo too small | Transparent padding not removed | Only applies to Pillow/banner workflow — for HTML carousel use `width:48px; height:51px; object-fit:contain` |
 
 ---
 
-## Installation
+## Confirmed Working n8n SDK Workflow (Upload to Drive)
 
-Self-contained skill. Bundles:
-- `SKILL.md` — these instructions
-- `assets/fonts/` — 10 Satoshi `.otf` files (Regular, Bold, Black, Medium, Light + italics)
-- `assets/logo/` — Codiste logo as transparent PNG (white + black variants)
+```javascript
+import { workflow, node, trigger } from '@n8n/workflow-sdk';
 
-Install via Claude desktop app: Settings → Capabilities → Skills → drop the `.skill` file. Fonts and logo auto-load every session. No per-session uploads required.
+const start = trigger({
+  type: 'n8n-nodes-base.manualTrigger',
+  version: 1,
+  config: { name: 'Start', position: [0, 0] },
+  output: [{}]
+});
 
-**Optional:** user can drop a custom B&W cover image into `/mnt/user-data/uploads/` if they want a specific hero image on slide 1.
+const buildFileList = node({
+  type: 'n8n-nodes-base.code',
+  version: 2,
+  config: {
+    name: 'Build File List',
+    position: [224, 0],
+    parameters: {
+      jsCode: `const base = 'https://raw.githubusercontent.com/guaravcodiste/linkedin_post_creation/claude/cool-tesla-UYzOH/outputs/hire_ai_agent_dev_saas_skills';
+const topic = 'hire_ai_agent_dev_saas_skills';
+const files = [
+  topic + '_slide_01.png', topic + '_slide_02.png', topic + '_slide_03.png',
+  topic + '_slide_04.png', topic + '_slide_05.png', topic + '_slide_06.png',
+  topic + '_slide_07.png', topic + '_slide_08.png', topic + '_slide_09.png',
+  topic + '_captions.md'
+];
+return files.map(name => ({
+  json: {
+    fileName: name,
+    url: base + '/' + name,
+    mimeType: name.endsWith('.png') ? 'image/png' : 'text/markdown'
+  }
+}));`
+    }
+  },
+  output: [{ json: { fileName: 'slide_01.png', url: '...', mimeType: 'image/png' } }]
+});
+
+const downloadFromGitHub = node({
+  type: 'n8n-nodes-base.httpRequest',
+  version: 4.4,
+  config: {
+    name: 'Download from GitHub',
+    position: [448, 0],
+    parameters: {
+      url: '={{ $json.url }}',
+      options: { response: { response: { responseFormat: 'file' } } }
+    }
+  },
+  output: [{}]
+});
+
+const uploadToGoogleDrive = node({
+  type: 'n8n-nodes-base.googleDrive',
+  version: 3,
+  config: {
+    name: 'Upload to Google Drive',
+    position: [672, 0],
+    parameters: {
+      operation: 'upload',
+      name: "={{ $('Build File List').item.json.fileName }}",
+      driveId: { __rl: true, mode: 'list', value: 'My Drive' },
+      folderId: { __rl: true, mode: 'id', value: '1pM75JINX2pud4fZ-Wk82S1zzSH9dI7mT' },
+      options: {}
+    }
+  },
+  output: [{}]
+});
+
+const sendGoogleChat = node({
+  type: 'n8n-nodes-base.httpRequest',
+  version: 4.4,
+  config: {
+    name: 'Send Google Chat Success',
+    position: [896, 0],
+    executeOnce: true,
+    parameters: {
+      method: 'POST',
+      url: 'https://chat.googleapis.com/v1/spaces/AAQAT72CHuU/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=meuLGzxAlDIIlSDFTG7skunMSeC6N2QPIZaqS93-93M',
+      sendBody: true,
+      specifyBody: 'json',
+      jsonBody: { text: 'Carousel ready! [Topic] — 9 slides + captions uploaded to Google Drive.' },
+      options: {}
+    }
+  },
+  output: [{}]
+});
+
+export default workflow('QMMl6ELpEz0wfbaW', 'LinkedIn Content — Upload to Google Drive (carsoual)')
+  .add(start)
+  .to(buildFileList)
+  .to(downloadFromGitHub)
+  .to(uploadToGoogleDrive)
+  .to(sendGoogleChat);
+```
+
+---
+
+*Last updated: May 2026 — based on confirmed production run.*
+*Corrections in this version vs SKILL.md: logo file mapping fixed (pixel-verified), Playwright executable path added, font path corrected to repo root, all unused asset-upload and Freepik sections removed.*
