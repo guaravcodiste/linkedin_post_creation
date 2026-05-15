@@ -48,14 +48,199 @@ Follow all instructions in that file for article writing, title rules, caption f
 
 ---
 
-## Step 3 — Write the LinkedIn Article
-
-Follow `codiste-linkedin-repurpose.md` Phase 1 exactly:
-
-- **Title:** Short + punchy, 50–65 chars, use `:` not `—`, audience-led (CTO/founder POV)
-- **Article:** 700–800 words, strong hook, 3 subheadings with bullets, CTA block at end
-- **Caption:** 2 lines — Line 1 in Unicode bold, Line 2 with CTA arrow
-
+### Step 3 — Write the Article (700–800 words)
+ 
+#### Length
+- **700–800 words** — tight and scannable
+- Cut fluff, repetition, and overly technical detail
+- **Do NOT go over 800 words.** Word count overrun is a top reason articles underperform on LinkedIn.
+#### Opening Hook (first 2–3 lines — critical)
+- LinkedIn truncates at ~200 chars before "...see more"
+- Open with a bold statement, surprising stat, or relatable pain point
+- NEVER start with "In today's digital world…", "In this article…", or generic openers
+**Examples of strong openings:**
+- *"Most companies are building AI wrong. Here's what the smart ones do differently."*
+- *"We've helped 50+ startups launch blockchain products. The #1 mistake? Skipping this step."*
+- *"Web3 isn't dead. It just grew up."*
+- *"The model you pick isn't an AI decision — it's a product bet on speed vs reasoning."*
+#### Structure
+```
+[HOOK PARAGRAPH]       — 2–3 punchy lines, no heading
+[CONTEXT / PROBLEM]    — Why this matters now
+[SECTION 1]            — First key insight (subheading) + bullets
+[SECTION 2]            — Second key insight (subheading) + bullets
+[SECTION 3]            — Third key insight (subheading) + bullets
+[TAKEAWAY]             — 2–3 lines crystallizing the point
+[CTA]                  — Read more + connect with Codiste
+```
+ 
+#### Formatting Rules
+- Max 2–3 sentences per paragraph
+- Each section uses 3–5 bullet points (1 sentence each, punchy)
+- Mix: 1–2 intro sentences → 3–5 bullets → optional closing line
+**Example section format:**
+```
+## Why Most AI Implementations Fail
+ 
+Companies dive into AI without a clear strategy. The result? Wasted budgets and frustrated teams.
+ 
+Here's what goes wrong:
+- No defined use case before building
+- Data is siloed or poorly structured
+- Teams lack AI literacy to adopt the tools
+- ROI is never measured properly
+ 
+Getting this right from day one changes everything.
+```
+ 
+#### Subheading Rules
+- **Make them outcome-oriented or question-based** — never copy the blog's subheadings verbatim
+- Use numbers where natural ("3 reasons", "The 5-step…")
+- Keep them under 8 words when possible
+- Each subheading should make a reader want to read that section
+#### Tone & Voice
+- Conversational but credible — smart colleague, not sales pitch
+- First-person plural where natural ("We've seen…", "Our team has worked with…")
+- Active voice always
+- No jargon without explanation
+- Avoid: "leverage", "synergy", "cutting-edge", "game-changing", "in today's fast-paced world"
+#### Keywords & SEO for LinkedIn
+Naturally weave in:
+- The **core topic keyword** (e.g., "AI agents","generative AI","MCP","AI Product Management","VC")
+- Related professional terms the target audience searches for
+- Do NOT keyword-stuff — one natural mention per paragraph is enough
+- Use the keyword in: the title, first paragraph, and at least one subheading
+#### CTA Block (end of every article)
+```
+---
+ 
+🔗 **Want the full breakdown?**
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+ 
+🤝 **Building something in [topic area]?**
+Connect with Codiste — we help startups and enterprises design, build, and scale
+[AI / Blockchain / Web] solutions. Reach out at codiste.com or drop a comment below.
+```
+ 
+### Step 3.1 — Authenticity Check
+ 
+Every claim, stat, example, or fact must trace back to the source content.
+ 
+**Verify:**
+1. **Stats & Numbers** — Every figure must appear in the original content. If not there, remove it.
+2. **Examples & Case Studies** — Any specific company, product, or scenario must come from the source.
+3. **Claims & Assertions** — Every bold claim must be grounded in the source.
+4. **New Ideas** — If a sentence introduces an idea not in the source, remove it or mark it as a rhetorical device.
+**What IS allowed:**
+- Rewording the same idea in a punchier way ✅
+- Reorganizing the order of points ✅
+- Simplifying technical explanations ✅
+- Adding a rhetorical question as a hook (grounded in the source) ✅
+- Sharpening framing or POV (as long as the underlying claim is in the source) ✅
+**What is NOT allowed:**
+- Adding stats or numbers not in the source ❌
+- Mentioning companies or products not referenced in the source ❌
+- Drawing conclusions the source doesn't make ❌
+- Filling gaps with general industry knowledge ❌
+### Step 3.2 — Caption (Single Best Version)
+ 
+**Default: write ONE caption, your best one.** Only generate multiple options if the user asks for "more options", "give me variations", or similar.
+ 
+Caption rules:
+- **Strictly 2 lines only**
+- **Line 1:** Bold standalone insight in **Unicode bold** — angle NOT covered in the article
+- **Line 2:** Natural CTA to the article (with `→ [article link]`)
+- 4–6 hashtags after Line 2 (separate from article hashtags)
+- Tone: authoritative, strategic, CTO / product leadership audience
+- Never start Line 1 with "In today's…", "AI is transforming…", or generic openers
+**Caption examples by topic** (use the closest one as tone reference, never copy verbatim):
+ 
+*ML/GenAI architecture (reframe hook):*
+```
+𝗧𝗵𝗲 𝗯𝘂𝘀𝗶𝗻𝗲𝘀𝘀𝗲𝘀 𝘄𝗶𝗻𝗻𝗶𝗻𝗴 𝘄𝗶𝘁𝗵 𝗔𝗜 𝘀𝘁𝗼𝗽𝗽𝗲𝗱 𝗮𝘀𝗸𝗶𝗻𝗴 "𝘄𝗵𝗶𝗰𝗵 𝘁𝗲𝗰𝗵𝗻𝗼𝗹𝗼𝗴𝘆" 𝗮𝗻𝗱 𝘀𝘁𝗮𝗿𝘁𝗲𝗱 𝗮𝘀𝗸𝗶𝗻𝗴 "𝘄𝗵𝗶𝗰𝗵 𝗮𝗿𝗰𝗵𝗶𝘁𝗲𝗰𝘁𝘂𝗿𝗲."
+ML vs Generative AI is the wrong debate — here's what's actually driving ROI → [article link]
+#AIStrategy #MachineLearning #GenerativeAI #AIArchitecture #ProductStrategy
+```
+ 
+*Pattern-recognition / tech shifts:*
+```
+𝗙𝗶𝗿𝘀𝘁 𝗶𝘁 𝘄𝗮𝘀 𝗔𝗽𝗽𝗹𝗲. 𝗧𝗵𝗲𝗻 𝗶𝗻𝗯𝗼𝘅 𝗔𝗜. 𝗡𝗼𝘄 𝗚𝗺𝗮𝗶𝗹. 𝗧𝗵𝗲 𝗽𝗮𝘁𝘁𝗲𝗿𝗻 𝗶𝘀 𝘁𝗼𝗼 𝗼𝗯𝘃𝗶𝗼𝘂𝘀 𝘁𝗼 𝗶𝗴𝗻𝗼𝗿𝗲.
+Stop treating this as a marketing problem — it's a product strategy one → [article link]
+#EmailStrategy #ProductStrategy #CTOInsights #PrivacyFirst #DigitalTransformation
+```
+ 
+*Capital efficiency / studio:*
+```
+𝗧𝗵𝗲 𝘀𝘁𝘂𝗱𝗶𝗼𝘀 𝘄𝗶𝗻𝗻𝗶𝗻𝗴 𝗶𝗻 𝟮𝟬𝟮𝟲 𝗮𝗿𝗲𝗻'𝘁 𝘁𝗵𝗲 𝗼𝗻𝗲𝘀 𝘄𝗶𝘁𝗵 𝘁𝗵𝗲 𝗯𝗶𝗴𝗴𝗲𝘀𝘁 𝗳𝘂𝗻𝗱𝘀 — 𝘁𝗵𝗲𝘆'𝗿𝗲 𝘁𝗵𝗲 𝗼𝗻𝗲𝘀 𝘁𝗮𝗸𝗶𝗻𝗴 𝟯𝘅 𝗺𝗼𝗿𝗲 𝘀𝗵𝗼𝘁𝘀 𝗼𝗻 𝗴𝗼𝗮𝗹.
+The math behind AI-powered venture studios — and why most are still using the old playbook → [article link]
+#VentureStudios #AIForStartups #StartupStrategy #CapitalEfficiency #AIStrategy
+```
+ 
+*Security / fintech (challenge hook):*
+```
+𝗬𝗼𝘂𝗿 𝗔𝗜 𝗮𝗴𝗲𝗻𝘁𝘀 𝗮𝗿𝗲 𝗺𝗮𝗸𝗶𝗻𝗴 𝗱𝗲𝗰𝗶𝘀𝗶𝗼𝗻𝘀 𝘁𝗵𝗮𝘁 𝗮𝘂𝗱𝗶𝘁𝗼𝗿𝘀 𝘄𝗶𝗹𝗹 𝗼𝗻𝗲 𝗱𝗮𝘆 𝗮𝘀𝗸 𝘆𝗼𝘂 𝘁𝗼 𝗲𝘅𝗽𝗹𝗮𝗶𝗻. 𝗖𝗮𝗻 𝘆𝗼𝘂?
+The 7-point MCP audit checklist every fintech CISO should run → [article link]
+#MCPSecurity #FintechAI #AIGovernance #CISO #DORA
+```
+ 
+### Step 3.3 — Quality Checklist (Run Before Delivering)
+ 
+- [ ] Title under 70 characters
+- [ ] Title uses `:` not `—`
+- [ ] Title is fresh, audience-led, not copied from source
+- [ ] All subheadings are rephrased (not copied verbatim from source)
+- [ ] Opening hook is strong — grabs attention in the first 2 lines
+- [ ] Each section uses short paragraphs (max 2–3 sentences) + bullet points
+- [ ] Article is **700–800 words** — not over, not under
+- [ ] Core message and all key insights from the source are preserved
+- [ ] Tone is conversational and engaging — not corporate or robotic
+- [ ] No jargon left unexplained
+- [ ] Keywords appear naturally (not stuffed)
+- [ ] CTA includes both: link to blog + connect with Codiste (codiste.com)
+- [ ] 5 relevant hashtags suggested for the article
+- [ ] Authenticity check passed — every fact, stat, claim traces back to source
+- [ ] LinkedIn caption is exactly 2 lines — Line 1 in Unicode bold, Line 2 with CTA
+- [ ] Caption hook does NOT repeat or summarize the article — introduces higher-level angle
+- [ ] Caption has 4–6 hashtags (separate from article hashtags)
+- [ ] Publishing notes included
+### Step 3.4 — Article Output Format
+ 
+Deliver in this exact format:
+ 
+```
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+ 
+TITLE:
+[Confirmed LinkedIn title]
+ 
+KEYWORDS TO USE AS HASHTAGS:
+#Keyword1 #Keyword2 #Keyword3 #Keyword4 #Keyword5
+ 
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+ 
+[Full article here]
+ 
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+ 
+[Line 1 Unicode bold]
+[Line 2 CTA with article link]
+ 
+#Hashtag1 #Hashtag2 #Hashtag3 #Hashtag4 #Hashtag5
+ 
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~[X] words
+• Estimated read time: [X] min
+• Remember to: add the blog URL in the CTA
+```
+ 
 Save article to file:
 ```
 /home/user/linkedin_post_creation/articles/{topic-slug}-linkedin-article.txt
@@ -65,6 +250,8 @@ Also copy to repo root for git tracking:
 ```
 /home/user/linkedin_post_creation/{topic-slug}.txt
 ```
+
+**After delivering the article, immediately proceed to step 4 — Banner. Do NOT wait for the user to ask.**
 
 ---
 
@@ -471,5 +658,3 @@ mcp__n8n__execute_workflow(workflowId: "j5QLzZK1iT96yOql", executionMode: "manua
 | Instruction file | `codiste-linkedin-repurpose.md` in repo root |
 
 ---
-
-*Documented: May 2026 — based on first successful end-to-end run*
