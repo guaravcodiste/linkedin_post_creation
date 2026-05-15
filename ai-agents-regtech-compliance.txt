@@ -1,0 +1,90 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+AI Agents for RegTech: The Audit Trail Built Into Operations
+
+KEYWORDS TO USE AS HASHTAGS:
+#RegTech #AIAgents #ComplianceAutomation #FINRA #KYC
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+Your compliance team spends two months before every FINRA examination reconstructing what happened in systems that were never built to explain themselves.
+
+The AI hallucination anxiety your board raises every quarter is real. But it's pointed at the wrong layer. Auditors don't ask whether your AI makes mistakes — they check whether you can prove what it did, when it did it, and why. That's an architecture problem.
+
+## Why Hallucination Becomes a Controls Issue
+
+Traditional ML models in compliance workflows run inference and produce a score. The score is the output. There's no memory of why the model weighted one AML flag over another on a specific transaction. That opacity is the actual risk — not the hallucination itself.
+
+Regulators don't penalize AI systems for getting answers wrong. They penalize organizations that cannot explain what the system did. A FINRA examiner looking at an AML flag from an opaque model has no basis for evaluating whether that flag reflected legitimate pattern detection or a model artifact.
+
+A 2024 Deloitte survey found that 67% of financial services firms cite inability to explain AI decisions as their top barrier to regulatory approval for automated compliance systems. The fix isn't better explainability tooling bolted onto a black box. It's building agents where the reasoning trace is the primary output — not an afterthought.
+
+## How Agentic Memory Creates a Self-Auditing Ledger
+
+AI agents built on deterministic memory architectures solve this structurally. Each reasoning step is a discrete, logged event — the agent reads a data input, applies a policy rule, records the result, and moves to the next step. The memory layer isn't a log file appended after the fact. It's the substrate the agent runs on.
+
+A compliant agentic system uses three memory layers:
+
+- Working memory logs the current task context — the specific customer record, transaction set, and policy version being evaluated. Every read and write is timestamped.
+- Episodic memory records completed decisions: KYC passes, AML escalations, sanctions hits — each with the input state, policy applied, intermediate reasoning steps, and final output. This is what FINRA examiners actually request.
+- Semantic memory holds the policy corpus — AML typologies, KYC thresholds, sanctions list mappings — versioned with effective dates. When policy changes, the old version is archived. When an examiner asks about a 2023 transaction, the agent replays the decision against the policy active at that time.
+
+Auditors don't read logs. They query the ledger. That distinction determines whether your exam prep takes 90 seconds or 90 days.
+
+## The Controls SOC 2 and FINRA Actually Check
+
+Every item on the SOC 2 and FINRA examination checklist maps directly to a structural component of an agentic compliance system:
+
+- Access and authorization logs → Working memory access logs with role attribution (required in every SOC 2 Type II audit)
+- Decision audit trail → Episodic memory per transaction or customer action (every FINRA AML examination)
+- Policy version control → Semantic memory with effective date ranges (FINRA policy change period reviews)
+- Anomaly detection and escalation → Agent escalation triggers with reasoning trace intact (BSA examinations)
+- Data lineage → Input provenance recorded at ingest (SOC 2, SEC rule 17a-4)
+- Model governance → Agent configuration snapshots tied to each decision record (OCC AI guidance SR 11-7)
+
+None of these require custom tooling added after the fact. Each is a structural property of how the agent was built. If the controls aren't satisfied, the gap is architectural — not operational.
+
+## What This Looks Like in Production
+
+A US neobank processing 40,000 account openings per month runs KYC through a four-agent pipeline: intake, document verification, sanctions screening, and policy decision. Every agent writes to episodic memory at completion.
+
+The complete record for a single application includes 47 discrete logged events on average — each with timestamp, policy version, input state, and output. Preparation time for an examiner request: under 90 seconds.
+
+Before this architecture, the compliance team spent 3 hours per file assembling records from four disconnected systems. The hallucination risk is contained at the structural level: the decision agent cannot produce an output that contradicts what upstream agents recorded in episodic memory. The ledger is the ground truth.
+
+## Build the Audit Trail Before the Exam
+
+The question isn't whether AI belongs in compliance workflows. It's whether the architecture you deploy will survive an examination.
+
+Built correctly, the audit trail is a byproduct of normal operations — not a two-month reconstruction project.
+
+---
+
+🔗 Want the full breakdown?
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 Building something in compliance AI?
+Connect with Codiste — we help fintechs and neobanks design, build, and scale regulated AI agent systems. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗬𝗼𝘂𝗿 𝗔𝗜 𝗮𝗴𝗲𝗻𝘁𝘀 𝗮𝗿𝗲 𝗺𝗮𝗸𝗶𝗻𝗴 𝗰𝗼𝗺𝗽𝗹𝗶𝗮𝗻𝗰𝗲 𝗱𝗲𝗰𝗶𝘀𝗶𝗼𝗻𝘀 𝗮𝘂𝗱𝗶𝘁𝗼𝗿𝘀 𝘄𝗶𝗹𝗹 𝗼𝗻𝗲 𝗱𝗮𝘆 𝗱𝗲𝗺𝗮𝗻𝗱 𝗽𝗿𝗼𝗼𝗳 𝗳𝗼𝗿. 𝗖𝗮𝗻 𝘆𝗼𝘂 𝗽𝗿𝗼𝗱𝘂𝗰𝗲 𝗶𝘁?
+The fintechs surviving FINRA exams without drama built the audit trail before they needed it → [article link]
+
+#RegTech #AICompliance #FinTechAI #AMLCompliance #AIGovernance
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~745 words
+• Estimated read time: 3 min
+• Remember to: add the blog URL in the CTA
+• Target audience: CCOs, CTOs, Chief Credit Officers at US fintechs and neobanks
+• Best posting time: Tuesday–Thursday, 7–9am EST
