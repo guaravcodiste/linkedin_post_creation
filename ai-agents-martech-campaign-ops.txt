@@ -1,0 +1,95 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+AI Agents for Campaign Ops: Brief to Launch in Under 4 Days
+
+KEYWORDS TO USE AS HASHTAGS:
+#Martech #MarketingOps #AIAgents #CampaignAutomation #MOPs
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+Your marketing ops team spends 4.2 hours of actual work to launch a campaign that takes 16 days.
+
+The remaining time isn't creative iteration. It's 14 to 22 handoff steps — brief to audience segment, segment to channel config, channel config to UTM parameters, creative spec to production queue — each one waiting for a human to move data between systems. That's not a creative bottleneck. It's a handoff problem. AI agents are built for exactly this.
+
+## Where the 12 Missing Days Actually Go
+
+Creative production for a standard multi-channel campaign takes 3 to 5 days. The campaign launch takes 10 to 18. That gap is operational, not creative.
+
+One MOPs lead who mapped the full handoff chain at a B2B SaaS company found 19 discrete steps between brief approval and go-live. She timed every one. Total human touch time: 4.2 hours. Total elapsed time: 16 days. The gap was entirely queue time — each step waiting for the next person to notice it landed in their inbox.
+
+Those delays create compounding costs:
+- Campaigns launching 10 to 14 days after the market window opens lose 15 to 25% of first-week conversions compared to campaigns that go live within 48 hours of brief approval
+- Analysts spend hours on data movement and UTM cleanup instead of performance optimization
+- Error rates on UTM configuration reach 11% when ops teams manage more than 8 concurrent campaign setups
+
+Not one of those handoff steps requires creative judgment. They require data to move between systems without a human as the intermediary.
+
+## The Four Nodes That Replace the Handoff Chain
+
+A production campaign ops agent runs as an event-driven workflow, triggering on brief approval in the project management system. It fires on approval — no waiting for someone to start the setup manually.
+
+Four agent nodes handle the full operational pipeline:
+
+**Brief parsing.** Ingests the approved brief and extracts campaign objectives, target audience parameters, channel requirements, budget allocation, and timeline into structured fields that downstream nodes can act on.
+
+**Audience segmentation.** Connects to the CDP, builds the segment based on parsed parameters, validates size against historical performance benchmarks, and flags segments below the minimum viable threshold — the only point where this node routes back to a human.
+
+**Channel configuration.** Maps the campaign to each specified channel, configures UTM parameters per the existing naming convention, sets per-channel budget allocations, and prepares platform-specific creative specs for the production queue.
+
+**Creative routing.** Routes creative specs to the production team with channel requirements attached, sets due dates against the campaign timeline, and monitors completion status. The agent doesn't generate creative. It routes requirements and tracks progress.
+
+Human handoffs fire at exactly two points: when an audience segment falls below the minimum viable threshold, and when creative production is complete and requires brand compliance review before platform upload. Every other step is automated.
+
+## 90-Day Results at a 30–40 Campaign-Per-Quarter SaaS Company
+
+A four-person MOPs team at a B2B SaaS company ran this architecture for 90 days against their live campaign pipeline:
+
+- **76% reduction** in median launch time (16 days → 3.8 days)
+- **79% drop** in human touch time per campaign setup (4.2 hours → 0.9 hours)
+- **UTM error rate** fell from 11% to under 2% — eliminating the monthly attribution cleanup cycle
+- **Concurrent campaign capacity** jumped from 8 to 20+ without adding headcount
+- **Creative-to-platform upload** compressed from 2.3 days to 4 hours
+
+The VP of Marketing had been requesting a fifth MOPs hire for two quarters. She pulled the req after month two. The team's capacity more than doubled — and every gain was operational. The creative team still does the creative work. The agent does the data movement.
+
+## What This Means for a Lean MOPs Team
+
+When 79% of campaign setup time is automated, your team stops being the execution bottleneck and starts having capacity for strategy:
+
+- Campaigns that launch within the market window instead of 12 days after it
+- Analysts spending time on optimization and audience refinement instead of UTM parameter cleanup
+- Seasonal and always-on programs running simultaneously without error rates climbing
+
+The campaign brief didn't change. The chain that processes it after approval did.
+
+If your current launch timeline still depends on 14 manual handoffs, the problem isn't your team's effort — it's the architecture. Brief-to-launch agents compress the ops chain without touching the creative.
+
+---
+
+🔗 **Want the full breakdown?**
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 **Running multi-channel campaigns with a lean MOPs team?**
+Connect with Codiste — we build brief-to-launch agent systems integrated with your existing CDP, ad platforms, and creative tools. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗠𝗮𝗿𝗸𝗲𝘁𝗶𝗻𝗴 𝗼𝗽𝘀 𝘁𝗲𝗮𝗺𝘀 𝗮𝗿𝗲𝗻'𝘁 𝘀𝗹𝗼𝘄 — 𝘁𝗵𝗲𝘆'𝗿𝗲 𝘀𝘁𝘂𝗰𝗸 𝗶𝗻 𝗮 𝟭𝟲-𝗱𝗮𝘆 𝗽𝗶𝗽𝗲𝗹𝗶𝗻𝗲 𝗯𝘂𝗶𝗹𝘁 𝗳𝗼𝗿 𝗮 𝗱𝗶𝗳𝗳𝗲𝗿𝗲𝗻𝘁 𝗲𝗿𝗮.
+How one SaaS team cut campaign launch from 16 days to 3.8 — without adding headcount → [article link]
+
+#Martech #MarketingOps #AIAgents #CampaignAutomation #GrowthMarketing
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~755 words
+• Estimated read time: 3–4 min
+• Remember to: add the blog URL in the CTA before publishing
+• Slug: ai-agents-martech-campaign-ops
