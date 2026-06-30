@@ -1,0 +1,85 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+AI Agent Vendors: 4 Tests That Separate Real From Hype in 2026
+
+KEYWORDS TO USE AS HASHTAGS:
+#AIAgents #EnterpriseAI #VendorSelection #AgenticAI #AIStrategy
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+Over 400 companies claimed full-stack agentic AI capability in 2026. Fewer than one in five have shipped a production system at scale.
+
+Your procurement team can't tell which is which from a demo. That's the problem.
+
+Most enterprise AI agent projects fail at vendor selection, not during the build. The frameworks built to evaluate SaaS vendors don't transfer to agentic systems — and most buyers don't know what they're missing until the contract is signed.
+
+## Why Standard Vendor Evaluation Fails for AI Agents
+
+Three gaps explain most failed vendor selections.
+
+**The demo-to-production gap.** A compelling demo proves one thing: the vendor can wire an API to a language model and produce convincing output in a controlled environment. It proves nothing about how the system behaves at step 47 of a 60-step workflow, what happens when a tool call returns null, or how it recovers when a downstream API rate-limits the agent mid-task. Production readiness lives in edge cases. A demo never shows you edge cases.
+
+**The procurement rubric gap.** Standard evaluation criteria — certifications, headcount, years in business, client logos — are weak signals for agentic capability. A five-person team that built and shipped three production agents is a stronger partner than a 200-person consultancy that has run AI workshops and demo projects for two years. The rubric doesn't capture the difference.
+
+**The engagement structure gap.** Fixed-scope contracts don't fit agentic builds. Scope defined in output terms rather than behavior terms — combined with a single delivery milestone — is the structure behind most failed projects. The engagement model matters as much as the technical capability.
+
+## The 4 Capability Tests That Actually Matter
+
+Before signing any AI agent development contract, pressure-test the vendor on four capabilities:
+
+**1. Orchestration architecture.** Can they explain how the agent decides which tool to call and in what sequence? Ask them to walk through a real workflow they built — what triggers each step, how the agent handles ambiguity, and where human handoffs are defined. Vendors who build real production systems can explain this precisely. Those who wrap foundation models struggle with specifics.
+
+**2. Memory and state management.** Agentic workflows are multi-step. Ask how the vendor persists state across tool calls, what happens when a step fails mid-workflow, and how the agent resumes from a checkpoint. Poor state management is the most common cause of silent failure in production agent systems.
+
+**3. LLM routing logic.** Does the vendor route to different models based on task type, cost, and latency requirements? Production systems use routing logic — cheaper models for classification, stronger models for reasoning. A vendor with no routing strategy is running every task through one model at full cost with no latency optimization.
+
+**4. Production deployment history.** Ask for a specific production system they shipped — not a demo, not a pilot. What was the agent doing, what was the throughput, how long did it run in production, and what broke first? A credible vendor delivers a working agent in a sandboxed environment within 30 days of scoping. Use that as your baseline filter.
+
+## What Failed Builds Have in Common
+
+Analysis of agentic build failures across US enterprises in 2024 and 2025 surfaces four patterns:
+- Scope was defined in output terms rather than behavior terms
+- The vendor had no prior production deployment to reference
+- The engagement was fixed-scope with a single delivery milestone
+- The CTO was not involved in the technical evaluation phase
+
+None of these is a technology failure. They're procurement and structure failures — all preventable with the right selection process.
+
+## The Engagement Model That Fits Agentic Builds
+
+Milestone-based retainers outperform fixed-scope contracts for agentic projects. Requirements evolve as the agent is tested against real workflows. A fixed-scope contract locks requirements at signing — which is precisely when you know the least about the system's actual behavior in production.
+
+The right structure: scope the first milestone (a working agent in sandbox within 30 days), evaluate before committing the full budget, then sequence the remaining milestones with defined acceptance criteria at each.
+
+The vendor who can't commit to a 30-day sandbox milestone isn't confident in their production capability. That's the data you need before the contract gets signed.
+
+---
+
+🔗 **Want the full breakdown?**
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 **Evaluating AI agent development partners for an enterprise build?**
+Connect with Codiste — we help enterprises select, design, and ship AI agent systems with transparent capability and milestone-based engagement. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗠𝗼𝘀𝘁 𝗲𝗻𝘁𝗲𝗿𝗽𝗿𝗶𝘀𝗲 𝗔𝗜 𝗮𝗴𝗲𝗻𝘁 𝗽𝗿𝗼𝗷𝗲𝗰𝘁𝘀 𝗳𝗮𝗶𝗹 𝗯𝗲𝗳𝗼𝗿𝗲 𝘁𝗵𝗲 𝗯𝘂𝗶𝗹𝗱 𝘀𝘁𝗮𝗿𝘁𝘀 — 𝗮𝘁 𝘃𝗲𝗻𝗱𝗼𝗿 𝘀𝗲𝗹𝗲𝗰𝘁𝗶𝗼𝗻.
+4 capability tests that separate real AI agent vendors from demo-only shops in 2026 → [article link]
+
+#AIAgents #EnterpriseAI #VendorSelection #AgenticAI #AIStrategy
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~760 words
+• Estimated read time: 3–4 min
+• Remember to: add the blog URL in the CTA before publishing
+• Top hashtags: #AIAgents #EnterpriseAI #VendorSelection #AgenticAI #AIStrategy
+• Best posting time: Tuesday–Thursday, 7–9 AM or 12–1 PM in target audience timezone
