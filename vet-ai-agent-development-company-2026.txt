@@ -1,0 +1,87 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+How to Vet AI Agent Vendors: 4 Tests That Actually Matter in 2026
+
+KEYWORDS TO USE AS HASHTAGS:
+#AIAgents #AIVendorSelection #EnterpriseAI #AIStrategy #AgenticAI
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+Most enterprise AI agent builds don't fail at the build stage. They fail at vendor selection. A vendor gets chosen on demo quality and brand recognition, three months pass, and the team is debugging a hardcoded workflow dressed as autonomous reasoning. By then, the failed selection has already cost six figures.
+
+The enterprise AI agent vendor market holds over 400 firms claiming full-stack agentic capability in 2026. Fewer than one in five have shipped a production agentic system at scale. The procurement frameworks built to evaluate SaaS vendors don't transfer cleanly to agentic builds. You need a different evaluation lens entirely.
+
+## Where Vendor Selection Goes Wrong
+
+The demo-to-production gap in agentic systems is wider than in traditional software. A compelling demo proves the vendor can wire an API to a language model and produce convincing output in a controlled environment. It proves nothing about how the system behaves at step 47 of a 60-step workflow, or how it recovers when a downstream API rate-limits the agent mid-task.
+
+Four patterns appear consistently in failed agentic builds:
+
+- Scope was defined in output terms, not behavioral terms
+- The vendor had no prior production deployment to reference
+- The engagement model was fixed-scope with a single delivery milestone
+- The CTO was not involved in the technical evaluation phase
+
+None of these is a technology failure. They're procurement and structure failures.
+
+## The 4 Capability Tests That Expose Demo-Only Shops
+
+Run these four tests in a working session with the vendor's engineering lead — not through written responses.
+
+**Orchestration architecture:** Ask the vendor to diagram their approach for a four-step agent with a conditional branch and an external API call. Vendors who design orchestration as a graph with defined node behaviors and edge conditions build agents that handle real-world variability. Vendors who chain steps sequentially break the moment a step returns an unexpected output.
+
+**Memory and state management:** Ask how they handle an agent that needs to recall a fact from step 12 when it's at step 40. Concrete retrieval strategies with compression logic indicate real production experience. "We use the context window carefully" does not.
+
+**LLM routing strategy:** Production agents at enterprise scale generate significant inference costs. A capable vendor has a routing opinion before the build starts — routing classification tasks to smaller models and reserving high-capability models for complex reasoning steps. No routing strategy means runaway costs at scale.
+
+**Production deployment history:** Ask for a reference call with the engineering lead who built the agent, not the account manager. Ask what the first production failure was and how it was resolved. A vendor with real production history answers in specific, incident-level detail. Vague process descriptions indicate the production experience doesn't exist.
+
+## The 30-Day Sandbox Test
+
+The clearest signal of a capable AI agent development company is their willingness to run a scoped sandbox build within 30 days of engagement. Scope it to a single workflow with two to four tool calls, using your real data structure but anonymized data.
+
+The output tells you more than any reference call or portfolio review. You see how they architect, how they handle edge cases, and how they communicate when the agent behaves unexpectedly. Any vendor that resists the sandbox test is protecting something they don't want you to see before the contract is signed.
+
+## Engagement Model Red Flags
+
+Fixed-scope, fixed-price contracts for AI agent builds signal that the vendor doesn't understand the problem. Agentic builds require iteration. Fixed scope assumes scope is knowable in advance. The two are incompatible.
+
+A sound engagement model runs in three phases:
+
+- **Discovery (2–4 weeks):** Workflow mapping, data assessment, orchestration architecture design, and a scoping document. No code written.
+- **Milestone-based build:** Each milestone tied to a behavioral benchmark — not a deployment event. The agent meets 85% task completion on the benchmark set before moving to production.
+- **Ongoing optimization:** Prompt tuning, model updates, and incident response priced into the engagement upfront. Discovering this post-launch doubles the cost.
+
+If a vendor defines delivery as "code merged to main" rather than a behavioral threshold, you're funding a build that stops the moment the vendor collects payment.
+
+The AI agent development company you select in 2026 will shape whether your first agentic build reaches production or stalls in a demo loop. Build the evaluation process before you build the agent.
+
+---
+
+🔗 **Want the full breakdown?**
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 **Building something in enterprise AI?**
+Connect with Codiste — we help enterprises select, scope, and build production-ready AI agent systems with milestone-based delivery. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗠𝗼𝘀𝘁 𝗲𝗻𝘁𝗲𝗿𝗽𝗿𝗶𝘀𝗲 𝗔𝗜 𝗮𝗴𝗲𝗻𝘁 𝗯𝘂𝗶𝗹𝗱𝘀 𝗳𝗮𝗶𝗹 𝗯𝗲𝗳𝗼𝗿𝗲 𝗮 𝘀𝗶𝗻𝗴𝗹𝗲 𝗹𝗶𝗻𝗲 𝗼𝗳 𝗰𝗼𝗱𝗲 𝗶𝘀 𝘄𝗿𝗶𝘁𝘁𝗲𝗻 — 𝗮𝘁 𝘃𝗲𝗻𝗱𝗼𝗿 𝘀𝗲𝗹𝗲𝗰𝘁𝗶𝗼𝗻.
+The 4 capability tests (and 1 sandbox rule) that separate real AI builders from demo-only shops → [article link]
+
+#AIAgents #EnterpriseAI #AgenticAI #AIVendorSelection #AIStrategy
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~720 words
+• Estimated read time: 3 min
+• Remember to: add the blog URL in the CTA
+• Hashtags for article: #AIAgents #AIVendorSelection #EnterpriseAI #AIStrategy #AgenticAI
