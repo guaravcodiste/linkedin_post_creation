@@ -1,0 +1,94 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+AI Support Agents: Cut 38% of Tickets Without Losing CSAT
+
+KEYWORDS TO USE AS HASHTAGS:
+#AIAgents #SaaSSupport #CustomerSuccess #SupportAutomation #TicketDeflection
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+Most SaaS support teams are hiring reps to fight a queue that technology should be solving. The math doesn't work.
+
+At 45,000 users, a six-person support team handles 800 tickets per week. Headcount grows linearly. Ticket volume doesn't. The team falls behind, response times climb, and CSAT suffers — usually before leadership realizes the architecture is the problem.
+
+AI support agents don't replace your team. They remove the 58% of tickets that require no judgment at all.
+
+## Why Your Queue Grows Faster Than You Can Hire
+
+Ticket volume in SaaS has a structural composition problem. Between password resets, billing status checks, and feature how-to questions, the majority of incoming requests need only a data lookup and a standard response.
+
+One support ops lead tagged every ticket from a 45-day window by resolution complexity. What she found:
+
+- 58% of tickets followed one of 12 decision trees with zero branching that required human judgment
+- None of those tickets required context, nuance, or relationship to close
+- Each one was handled by the same reps your customers call when they're about to churn
+
+The expensive tickets — the ones that actually protect retention — were getting slower because reps were buried in the repetitive ones. This isn't a staffing problem. It's a routing problem.
+
+## How Confidence-Scored Routing Actually Works
+
+AI support deflection isn't a chatbot that guesses. It's a classification engine that scores each incoming ticket across three resolution paths before any human sees it.
+
+Here's what a production routing system does:
+
+- **Automated resolution**: Ticket matches a defined pattern → agent pulls product data, resolves, closes. No human involved.
+- **Intelligent routing**: Below the confidence threshold → agent classifies by type, scores by user plan tier and time-since-open, routes to the right specialist with pre-built context attached. The human picks up mid-diagnostic, not from scratch.
+- **Proactive escalation**: Agent detects signals — repeated failed actions, error patterns, usage drops of 40%+ over 14 days — and triggers outreach before the ticket is ever submitted.
+
+The classification pipeline uses intent detection, entity extraction, and semantic similarity to resolved ticket history. The engineering team that built one such system at a B2B analytics SaaS told us: week one over-resolved, week two under-resolved, week three matched a senior support rep's routing judgment at 91% agreement. That's the threshold worth shipping.
+
+Calibration doesn't stop there. Every automated resolution triggers a post-resolution CSAT micro-survey within 60 seconds. Low CSAT on a ticket type automatically lowers the confidence threshold for that type, routing more of them back to humans. The system corrects toward accuracy — not toward maximum deflection volume.
+
+## What 90 Days in Production Actually Looks Like
+
+At a B2B analytics SaaS with 45,000 users and 800 weekly tickets, here's what 90 days produced:
+
+- **38%** of tickets resolved autonomously — 310 per week closed without a human touching them
+- **74%** reduction in average first response time, from 4.6 hours to 1.2 hours
+- **39%** drop in handle time on human-resolved tickets, because the agent pre-classified each one
+- **4.1 out of 5** CSAT on AI-resolved tickets — within three points of human-resolved scores
+- **24 proactive outreach tickets per week** — issues resolved before the customer opened a support request
+
+The head of support had been requesting a seventh hire for two consecutive quarters. She pulled the req after month two.
+
+The distinction that made it work: 38% deflection at 4.1/5 CSAT is the goal. Higher deflection rates signal that the confidence threshold is too low — resolution quality slips before it shows up in the reporting.
+
+## The Outcome That Changes the Team
+
+The queue didn't shrink. The team's capacity for complex tickets doubled.
+
+Reps who spent 60% of their shift answering the same 12 questions started handling churn-risk conversations that require context, judgment, and relationship. CSAT on human-resolved tickets improved from 4.3 to 4.5 — not because the AI was impressive, but because the humans stopped burning out on repetitive work.
+
+Agents that handle 30 to 40 tickets per day don't quit because of hard cases. They quit because 20 of those tickets didn't need them.
+
+---
+
+🔗 **Want the full breakdown?**
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 **Building AI support automation for your SaaS?**
+Connect with Codiste — we help SaaS companies design, build, and scale AI agents that deflect high-volume tickets without trading CSAT for speed. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗬𝗼𝘂𝗿 𝘀𝘂𝗽𝗽𝗼𝗿𝘁 𝗿𝗲𝗽𝘀 𝗮𝗿𝗲𝗻'𝘁 𝗯𝘂𝗿𝗻𝗶𝗻𝗴 𝗼𝘂𝘁 𝗳𝗿𝗼𝗺 𝗰𝗼𝗺𝗽𝗹𝗲𝘅 𝘁𝗶𝗰𝗸𝗲𝘁𝘀 — 𝘁𝗵𝗲𝘆'𝗿𝗲 𝗯𝘂𝗿𝗻𝗶𝗻𝗴 𝗼𝘂𝘁 𝗳𝗿𝗼𝗺 𝘁𝗵𝗲 𝟲𝟬% 𝘁𝗵𝗮𝘁 𝗿𝗲𝗾𝘂𝗶𝗿𝗲 𝗻𝗼 𝗷𝘂𝗱𝗴𝗺𝗲𝗻𝘁 𝗮𝘁 𝗮𝗹𝗹.
+How AI support agents deflect 38% of SaaS tickets without degrading CSAT → [article link]
+
+#AIAgents #SaaSSupport #CustomerSuccess #SupportOps #AIStrategy
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~760 words
+• Estimated read time: 4 min
+• Remember to: add the blog URL in the CTA
+• Banner slug: saas-support-deflection
+• Banner LINE1: "AI Support Agents:"
+• Banner LINE2: "38% Fewer Tickets, Same CSAT"
