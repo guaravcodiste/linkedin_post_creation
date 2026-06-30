@@ -1,0 +1,89 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+AI Agents for SaaS Support Deflection: 38% Ticket Reduction Without Sacrificing CSAT
+
+KEYWORDS TO USE AS HASHTAGS:
+#SaaSSupport #AIAgents #SupportDeflection #CustomerSuccess #SaaSOperations
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+A VP of Customer Success at a 150-person SaaS company runs a six-person support team handling 800 tickets per week. She has been requesting a seventh hire for two quarters. At month two of deploying an AI support agent, she pulled the headcount request.
+
+The queue didn't shrink. Her team's capacity for complex issues doubled.
+
+That's the shift support deflection actually produces — not headcount elimination, but headcount redirection toward the work that requires judgment.
+
+## The Structural Problem in SaaS Support
+
+SaaS ticket volume has a compounding growth problem. Every new feature adds failure modes. Every new user cohort brings new question patterns. Every pricing change generates billing inquiries.
+
+The tickets consuming the most analyst time are not the complex ones. They are the high-volume, repeatable requests that require a lookup and a standard response: password resets, billing status checks, feature how-to questions, integration errors, configuration confirmations. None of these require judgment. They require data access and a clear response path.
+
+A support ops lead at a mid-market project management SaaS audited every ticket over a 45-day window. The finding: 58% of tickets followed one of 12 decision trees with zero branching that required human judgment. The other 42% required context or decisions that genuinely needed a person.
+
+Without automation, those 58% are costing $52,000 to $68,000 per support hire annually just to answer the same questions repeatedly.
+
+## How the Routing Logic Works
+
+AI agents reduce ticket volume through three distinct mechanisms — each operating on a different timeline.
+
+**Automated self-service resolution** handles tickets the agent can close using product documentation, account data, or a defined action. Password reset, plan information retrieval, configuration check. The agent resolves and closes. No human touches the ticket.
+
+**Intelligent routing** handles tickets that fall outside the agent's confidence threshold. Rather than dropping them to a generic queue, the agent classifies by type, assigns a priority score based on user plan tier and time-since-open, and routes to the right specialist with a pre-built diagnostic summary. The human agent picks up mid-diagnostic — not from scratch.
+
+**Proactive escalation** is the highest-value path. The agent monitors product usage signals before a ticket is ever submitted: repeated failed actions on the same feature trigger an onboarding friction alert; error patterns in logs matching known signatures trigger a technical outreach; usage drops of 40% or more over 14 days trigger a churn risk alert to the CS team.
+
+The proactive path converts reactive support into retention. The ticket never gets created.
+
+## What Production Results Look Like
+
+At a B2B SaaS company processing 800 support tickets per week with 45,000 active users, a 90-day production deployment produced three measurable outcomes:
+
+- **38% of weekly tickets** resolved autonomously — 310 tickets per week handled without human involvement
+- **74% reduction** in average first response time, from 4.6 hours to 1.2 hours
+- **39% drop** in handle time on human-resolved tickets, from pre-classified agent context
+
+CSAT on AI-resolved tickets landed at 4.1 out of 5, compared to human-resolved at 4.4. A three-point gap — within the accepted range for calibrated automated resolution.
+
+The concern that automation degrades CSAT is real but solvable. The fix is calibration, not avoidance. Every automated resolution triggers a post-resolution CSAT micro-survey. Low scores flag the ticket type for human review and lower the confidence threshold for that category. The system corrects toward accuracy over time — not toward maximum deflection volume.
+
+Teams that calibrate carefully consistently land at 35 to 40 percent deflection at 90 days. Higher deflection rates signal a threshold miscalibration, not a success. Resolution quality slips before the metric shows it.
+
+## The Calibration Window
+
+The classification pipeline learns. An LLM-based agent uses intent detection, entity extraction, and semantic similarity to resolved ticket history. The output is a ranked list of resolution candidates with confidence scores.
+
+The engineer who built the classification layer for a B2B analytics SaaS described the calibration arc: the first version over-resolved. The second under-resolved. The third matched the senior support rep's routing judgment at 91% agreement — close enough to ship.
+
+That calibration window typically runs 30 to 60 days. Skipping it and targeting maximum deflection from day one is the most common failure pattern in SaaS support automation deployments.
+
+---
+
+🔗 **Want the full breakdown?**
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 **Looking to reduce ticket volume without degrading CSAT?**
+Connect with Codiste — we build LLM-based support agents for SaaS teams with configurable confidence thresholds, full escalation paths, and proactive outreach connectors. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝟲 𝘀𝘂𝗽𝗽𝗼𝗿𝘁 𝗿𝗲𝗽𝘀. 𝟴𝟬𝟬 𝘁𝗶𝗰𝗸𝗲𝘁𝘀/𝘄𝗲𝗲𝗸. 𝟯𝟴% 𝗻𝗼𝘄 𝗿𝗲𝘀𝗼𝗹𝘃𝗲𝗱 𝘄𝗶𝘁𝗵𝗼𝘂𝘁 𝗮 𝘀𝗶𝗻𝗴𝗹𝗲 𝗵𝘂𝗺𝗮𝗻 𝘁𝗼𝘂𝗰𝗵.
+How AI agents cut SaaS support ticket volume — and why targeting maximum deflection is the wrong goal → [article link]
+
+#SaaSSupport #AIAgents #SupportDeflection #CustomerSuccess #SaaSOperations
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~730 words
+• Estimated read time: 3 min
+• Remember to: add the blog URL in the CTA before publishing
+• Top hashtags: #SaaSSupport #AIAgents #SupportDeflection #CustomerSuccess #SaaSOperations
+• Best posting time: Tuesday–Thursday, 7–9 AM or 12–1 PM in target audience timezone
