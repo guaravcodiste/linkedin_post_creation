@@ -1,0 +1,93 @@
+════════════════════════════════════════
+🔷 LINKEDIN ARTICLE — CODISTE
+════════════════════════════════════════
+
+TITLE:
+Stale CRM Data: The Real Reason Sales Ops Keeps Breaking
+
+KEYWORDS TO USE AS HASHTAGS:
+#AIAgents #SalesOps #B2BSaaS #CRMData #ForecastHygiene
+
+════════════════════════════════════════
+ARTICLE BODY:
+════════════════════════════════════════
+
+A demo request lands at 6:12 p.m. on a Friday. The routing rule fires exactly as written, territory-based, like it's supposed to. The lead drops into a Midwest rep's queue. She works it Monday at 9:04 a.m.
+
+Sixty-three hours late. A competitor called back in four minutes.
+
+Nobody made a mistake. The rule fired correctly. The only thing that failed was a single field that was accurate when someone typed it, and quietly stopped being true after the company moved its headquarters to Austin.
+
+That's what B2B SaaS sales ops runs on: a warehouse of facts that were true once. Enrichment decides what a record says. Routing decides where it goes and how fast. Forecast hygiene decides whether the number sent to the board is real. All three inherit the same decay, and all three fail quietly enough that the post-mortem ends up blaming the reps.
+
+## One Root Cause, Not Three
+
+Every sales ops function reads from the same decaying source, and none of them re-check it.
+
+- HubSpot's Database Decay Simulation puts monthly B2B contact decay at 2.1%, compounding to roughly 22.5% a year
+- Dun & Bradstreet puts it at 30% to 40% annually in high-mobility sectors like SaaS
+- Only 35% of sales professionals completely trust their CRM data's accuracy, per Salesforce's State of Sales research
+- 47% say accuracy is harder to maintain now than it was twelve months ago
+- Reps spend roughly 30% of their week actually selling; the rest goes to CRM data entry, internal meetings, and account research
+
+Quarterly cleanups can't keep up with that math. At 2.1% monthly decay, a database cleaned on January 1st is already about 6% wrong by April.
+
+## Why Routing Breaks Fastest
+
+Routing is where stale data converts into lost revenue quickest, and the easiest place to prove an agent is working.
+
+- The MIT and InsideSales Lead Response Management study found a five-minute response makes qualification 21 times more likely than a thirty-minute one
+- A Harvard Business Review analysis of 2.24 million leads found responding within an hour made firms about seven times more likely to qualify
+- The average B2B lead response time still sits at 42 to 47 hours
+- 63.5% of SaaS companies tested in 2024 never responded to an inbound lead at all
+- Teams with a defined SLA respond within fifteen minutes 54.9% of the time, versus 29.5% without one
+
+Awareness of the five-minute window has improved. Execution got worse.
+
+## What Changes When Agents Run Continuously
+
+AI agents fix this not by working faster, but by working constantly, and by showing their work.
+
+- Every field update carries a confidence score and a source, so anything below threshold becomes a suggestion instead of a silent overwrite
+- Re-verification runs on a clock tied to how fast each field decays, not a quarterly ops calendar
+- Enrichment happens before the routing decision, so the rule keys on a current field instead of a stale one
+- Forecast hygiene checks stage evidence, stale deals, and close-date drift against the record's own history
+- XANT Labs found 47% of deals missed forecast by more than half, and Gartner reports fewer than 25% of organizations forecast above 75% accuracy — an input problem, not a modeling one
+
+None of these agents talk to buyers. Their output is a field update, a routing decision, or a flag on a deal that a human can audit.
+
+## The Order Isn't Optional
+
+Enrichment comes first because everything else depends on it. You can't route on a field you haven't enriched, and you can't forecast a pipeline that was misrouted.
+
+Start in suggest mode: the agent proposes writes, a human approves them, and you measure agreement rate before anything runs on autopilot. Promote by confidence tier as that agreement holds. Routing and forecast hygiene inherit the benefit once the fields underneath them are current.
+
+The stakes for skipping that order are real. Gartner projects more than 40% of agentic AI projects will be cancelled by the end of 2027. IDC puts the share of AI pilots that never reach production at 88%. Deloitte's 2026 research found only 21% of organizations have a mature governance model for autonomous agents, even as 74% plan to expand agentic deployment within two years.
+
+Speed amplifies a bad foundation as efficiently as a good one. An agent pointed at a CRM that's 30% wrong doesn't fix the 30%. It writes into it faster, with more confidence, and with less friction than the process it replaced.
+
+The Friday demo request didn't fail because of a bad rep or a bad rule. It failed because one field aged and nothing was watching it age. Fix enrichment, and the routing improvement is close to free. Fix routing, and the forecast starts describing something real.
+
+---
+
+🔗 **Want the full breakdown?**
+Read the complete guide on Codiste's blog: [Insert blog URL here]
+
+🤝 **Building something in AI agents for sales ops?**
+Connect with Codiste — we help startups and enterprises design, build, and scale AI solutions. Reach out at codiste.com or drop a comment below.
+
+════════════════════════════════════════
+💬 LINKEDIN CAPTION:
+════════════════════════════════════════
+
+𝗠𝗼𝘀𝘁 𝗔𝗜 𝗽𝗿𝗼𝗷𝗲𝗰𝘁𝘀 𝗱𝗼𝗻'𝘁 𝗳𝗮𝗶𝗹 𝗼𝗻 𝗺𝗼𝗱𝗲𝗹𝘀, 𝘁𝗵𝗲𝘆 𝗳𝗮𝗶𝗹 𝗼𝗻 𝘁𝗵𝗲 𝗱𝗮𝘁𝗮 𝘁𝗵𝗲𝘆'𝗿𝗲 𝗽𝗼𝗶𝗻𝘁𝗲𝗱 𝗮𝘁.
+Why enrichment has to come before routing and forecasting — and what breaks when it doesn't → [article link]
+
+#AIAgents #SalesOps #B2BSaaS #CRMData #RevOps
+
+════════════════════════════════════════
+📋 PUBLISHING NOTES:
+════════════════════════════════════════
+• Word count: ~800 words
+• Estimated read time: ~4 min
+• Remember to: add the blog URL in the CTA
